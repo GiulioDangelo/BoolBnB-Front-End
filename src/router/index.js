@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import AppHome from "../components/AppHome.vue";
-import AppAppartmentShow from "../components/AppAppartmentShow.vue";
-import AppAppartmentsIndex from "../components/AppAppartmentsIndex.vue";
-import AppAboutUs from "../components/AppAboutUs.vue";
-import App404 from "../components/App404.vue";
-import AppSearch from "../components/AppSearch.vue";
-import AppMessage from "../components/AppMessage.vue";
-import AppSearch from "../AppSearch.vue";
-import AppSponsor from "../components/AppSponsor.vue";
-import AppStatistic from "../components/AppStatistic.vue";
+import AppAppartmentShow from "../pages/AppAppartmentShow.vue";
+import AppAppartmentsIndex from "../pages/AppAppartmentsIndex.vue";
+import AppAboutUs from "../pages/AppAboutUs.vue";
+import App404 from "../pages/App404.vue";
+import AppSearch from "../pages/AppSearch.vue";
+import AppMessage from "../pages/AppMessage.vue";
+import AppSearch from "../pages/AppSearch.vue";
+import AppSponsor from "../pages/AppSponsor.vue";
+import AppStatistic from "../pages/AppStatistic.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
