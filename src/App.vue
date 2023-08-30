@@ -1,8 +1,16 @@
 <script>
-export default {};
+import AppNav from "./components/AppNav.vue";
+import AppFooter from "./components/AppFooter.vue";
+export default {
+  components: {
+    AppNav,
+    AppFooter,
+  },
+};
 </script>
 
 <template>
+  <AppNav />
   <router-view></router-view>
   <h1>ciao</h1>
   <font-awesome-icon icon="fa-solid fa-user-secret" />
@@ -11,6 +19,7 @@ export default {};
   <font-awesome-icon :icon="['fab', 'facebook']" />
   <font-awesome-icon :icon="['fab', 'instagram']" />
   <font-awesome-icon :icon="['far', 'star']" />
+  <AppFooter />
 </template>
 
 <style lang="scss">
