@@ -1,7 +1,5 @@
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <template>
@@ -16,5 +14,5 @@ export default {
 </template>
 
 <style lang="scss">
-@use './assets/styles/general.scss' as *;
+@use "./assets/styles/general.scss" as *;
 </style>
