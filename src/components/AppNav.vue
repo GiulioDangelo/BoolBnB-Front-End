@@ -3,45 +3,127 @@ export default {};
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <router-link :to="{ name: 'appartmentshow' }" class="navbar-brand"
-        >Home</router-link
+  <nav class="navbar navbar-expand-lg w-100 bg-white">
+    <div class="container">
+      <a class="navbar-brand">
+        <img src="../img/multicolor-horizontal-logo.png" alt="" />
+      </a>
+
+      <div
+        class="collapse navbar-collapse bg-white p-2 rounded"
+        id="navbarSupportedContent"
       >
-      <router-link :to="{ name: 'aboutus' }" class="navbar-brand"
-        >About Us</router-link
-      >
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"></li>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'appartments' }"
-              class="nav-link active"
-              aria-current="page"
-            >
-              apartments
-            </router-link>
+            <a class="nav-link" href="">In Evidenza</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Cerca Appartamenti</a>
           </li>
         </ul>
-        <!-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
+
+        <div class="d-flex gap-2">
+          <button class="login-link">
+            <a href="">Accedi</a>
+          </button>
+          <div class="border border-1 border-dark"></div>
+          <button class="register-link">
+            <a href="">Registrati</a>
+          </button>
+        </div>
       </div>
     </div>
   </nav>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.navbar {
+  height: 70px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  border-bottom: 1px solid #ff7210;
+}
+
+.log-btn a {
+  text-decoration: none;
+}
+
+.log-btn a:hover {
+  color: #424172;
+}
+
+.log-btn a:hover,
+.exit:hover button {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth {
+  color: #ff7210;
+}
+
+a img {
+  width: 120px;
+}
+
+.login-link,
+.register-link {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+.login-link,
+.register-link {
+  --primary-color: #424172;
+  --hovered-color: #ff7210;
+  position: relative;
+  display: flex;
+  font-weight: 600;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.login-link a,
+.register-link a {
+  margin: 0;
+  position: relative;
+  color: var(--primary-color);
+}
+
+.login-link a::before,
+.register-link a::before {
+  position: absolute;
+  width: 0%;
+  inset: 0;
+  color: var(--hovered-color);
+  overflow: hidden;
+  transition: 0.3s ease-out;
+}
+
+.login-link a::before {
+  content: "Accedi";
+}
+
+.register-link a::before {
+  content: "Registrati";
+}
+
+.login-link a:hover,
+.register-link a:hover {
+  text-decoration: none;
+}
+
+.login-link:hover::after,
+.register-link::after {
+  width: 100%;
+}
+
+.login-link:hover a::before,
+.register-link:hover a::before {
+  width: 100%;
+}
+</style>
