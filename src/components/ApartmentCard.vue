@@ -13,18 +13,24 @@ export default {
       required: true,
     },
   },
+  methods: {
+    getImageUrl(image) {
+      return image
+        ? this.store.baseUrl + "img/" + image
+        : this.store.baseUrl + "storage/default.jpg";
+    },
+  },
 };
 </script>
 
 <template>
   <div class="minip mt-5">
+    <img :src="getImageUrl(apartment.cover)" alt="" />
     <div class="mg">
-      <div class="clr"></div>
       <div class="group">
         <span>{{ apartment.title }}</span>
       </div>
     </div>
-    <img :src="apartment.strDrinkThumb" class="av card-img-top" />
 
     <div class="info border border-dark">
       <h5 class="card-title">{{ apartment.street }}</h5>
@@ -32,8 +38,8 @@ export default {
     </div>
 
     <router-link
-      :to="{ name: 'apartments.show', params: { apartment: apartment.id } }"
-      class="btn plot mt-auto border border-black"
+      :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
+      class="btn btn-primary mt-auto"
       >View more</router-link
     >
   </div>

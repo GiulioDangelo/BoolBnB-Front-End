@@ -1,7 +1,15 @@
-<template></template>
-
 <script>
-export default {};
+import ApartmentList from "../components/ApartmentList.vue";
+
+export default {
+  components: {
+    ApartmentList,
+  },
+};
 </script>
 
-<style></style>
+<template>
+  <ApartmentList />
+</template>
+
+<style lang="scss" scoped></style>

@@ -36,7 +36,7 @@ export default {};
   </nav>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .navbar {
   height: 70px;
   position: fixed;

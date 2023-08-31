@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import AppApartmentShow from "./pages/AppApartmentShow.vue";
 import AppApartmentsIndex from "./pages/AppApartmentsIndex.vue";
+import AppApartmentShow from "./pages/AppApartmentShow.vue";
 import AppAboutUs from "./pages/AppAboutUs.vue";
-import App404 from "./pages/App404.vue";
 import AppSearch from "./pages/AppSearch.vue";
 import AppMessage from "./pages/AppMessage.vue";
 import AppSponsor from "./pages/AppSponsor.vue";
 import AppStatistic from "./pages/AppStatistic.vue";
+import App404 from "./pages/App404.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -17,7 +17,7 @@ const router = createRouter({
       component: AppApartmentsIndex,
     },
     {
-      path: "/apartments/:apartment",
+      path: "/apartments/:slug",
       name: "apartments.show",
       component: AppApartmentShow,
     },
