@@ -24,13 +24,19 @@ export default {
     <img :src="this.store.baseUrl + 'storage/' + apartment.cover" alt="" />
     <p>{{ apartment.description }}</p>
     <div v-for="service in apartment.services" :key="service.id" class="container">
-                        <ul class="list-unstyled">
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                {{service.name}}
-                            </li>
-                        </ul>
-                    </div>
+        <ul class="list-unstyled">
+          <li>
+            <font-awesome-icon :icon="['fas', 'square-check']" />
+              {{service.name}}
+          </li>
+        </ul>
+    </div>
+
+    <div v-for="image in apartment.images" :key="image.id">
+      <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
+    </div>
+
+
   </template>
 </template>
 
