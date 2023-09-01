@@ -23,6 +23,14 @@ export default {
     <h5>{{ apartment.street }}</h5>
     <img :src="this.store.baseUrl + 'storage/' + apartment.cover" alt="" />
     <p>{{ apartment.description }}</p>
+    <div v-for="service in apartment.services" :key="service.id" class="container">
+                        <ul class="list-unstyled">
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                {{service.name}}
+                            </li>
+                        </ul>
+                    </div>
   </template>
 </template>
 
