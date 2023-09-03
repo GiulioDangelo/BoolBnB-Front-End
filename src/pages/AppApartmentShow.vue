@@ -1,14 +1,21 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
+import AppMap from './../components/AppMap.vue'
 
 export default {
+  
+  components:{
+    AppMap,
+  },
+
   data() {
     return {
       apartment: null,
       store,
     };
   },
+
   created() {
     axios
       .get(this.store.baseUrl + "api/apartments/" + this.$route.params.slug)
@@ -36,7 +43,7 @@ export default {
       <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
     </div>
 
-
+  <AppMap />
   </template>
 </template>
 
