@@ -8,6 +8,7 @@ import AppMessage from "./pages/AppMessage.vue";
 import AppSponsor from "./pages/AppSponsor.vue";
 import AppStatistic from "./pages/AppStatistic.vue";
 import App404 from "./pages/App404.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
