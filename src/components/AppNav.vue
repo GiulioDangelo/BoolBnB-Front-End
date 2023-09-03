@@ -5,7 +5,7 @@ export default {};
 <template>
   <nav class="navbar navbar-expand-lg w-100 bg-white">
     <div class="container">
-      <a class="navbar-brand">
+      <a class="navbar-brand" href="/">
         <img src="../img/multicolor-horizontal-logo.png" alt="" />
       </a>
 
@@ -18,17 +18,17 @@ export default {};
             <a class="nav-link" href="">In Evidenza</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Cerca Appartamenti</a>
+            <a class="nav-link" href="/apartments">Cerca Appartamenti</a>
           </li>
         </ul>
 
         <div class="d-flex gap-2">
           <button class="login-link">
-            <a href="">Accedi</a>
+            <a href="http://127.0.0.1:8000/login">Accedi</a>
           </button>
           <div class="border border-1 border-dark"></div>
           <button class="register-link">
-            <a href="">Registrati</a>
+            <a href="http://127.0.0.1:8000/register">Registrati</a>
           </button>
         </div>
       </div>
