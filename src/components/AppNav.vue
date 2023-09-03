@@ -6,13 +6,10 @@ export default {};
   <nav class="navbar navbar-expand-lg w-100 bg-white">
     <div class="container">
       <a class="navbar-brand" href="/">
-        <img src="../img/multicolor-horizontal-logo.png" alt="" />
+        <img src="../assets/img/multicolor-horizontal-logo.png" alt="" />
       </a>
 
-      <div
-        class="collapse navbar-collapse bg-white p-2 rounded"
-        id="navbarSupportedContent"
-      >
+      <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
           <li class="nav-item">
             <a class="nav-link" href="">In Evidenza</a>
@@ -22,14 +19,16 @@ export default {};
           </li>
         </ul>
 
-        <div class="d-flex gap-2">
-          <button class="login-link">
-            <a href="http://127.0.0.1:8000/login">Accedi</a>
-          </button>
-          <div class="border border-1 border-dark"></div>
-          <button class="register-link">
-            <a href="http://127.0.0.1:8000/register">Registrati</a>
-          </button>
+        <div class="log-btn">
+          <div class="d-flex gap-2">
+            <button class="login-link">
+              <a href="http://localhost:8000/login">Accedi</a>
+            </button>
+            <div class="border border-1 border-dark"></div>
+            <button class="register-link">
+              <a href="http://localhost:8000/register">Registrati</a>
+            </button>
+          </div>
         </div>
       </div>
     </div>
