@@ -55,8 +55,8 @@
 				.catch((error) => {
 					console.error(error);
 				});
-		},
-	};
+      },
+    };
 </script>
 
 <template>
