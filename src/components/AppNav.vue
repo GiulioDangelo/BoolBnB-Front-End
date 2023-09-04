@@ -15,7 +15,7 @@ export default {};
             <a class="nav-link" href="">In Evidenza</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/apartments">Cerca Appartamenti</a>
+            <a class="nav-link" href="/search">Cerca Appartamenti</a>
           </li>
         </ul>
 
