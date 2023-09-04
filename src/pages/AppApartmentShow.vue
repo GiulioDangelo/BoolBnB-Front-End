@@ -4,8 +4,8 @@ import { store } from "../store";
 import AppMap from './../components/AppMap.vue'
 
 export default {
-  
-  components:{
+
+  components: {
     AppMap,
   },
 
@@ -30,20 +30,20 @@ export default {
     <h5>{{ apartment.street }}</h5>
     <img :src="this.store.baseUrl + 'storage/' + apartment.cover" alt="" />
     <p>{{ apartment.description }}</p>
-    <div v-for="service in apartment.services" :key="service.id" class="container">
-        <ul class="list-unstyled">
-          <li>
-            <font-awesome-icon :icon="['fas', 'square-check']" />
-              {{service.name}}
-          </li>
-        </ul>
+    <div class="container">
+      <ul class="list-unstyled">
+        <li v-for="service in apartment.services" :key="service.id">
+          <font-awesome-icon :icon="['fas', 'square-check']" />
+          {{ service.name }}
+        </li>
+      </ul>
     </div>
 
     <div v-for="image in apartment.images" :key="image.id">
       <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
     </div>
 
-  <AppMap />
+    <AppMap />
   </template>
 </template>
 
