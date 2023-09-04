@@ -1,11 +1,10 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
-import AppMap from './../components/AppMap.vue'
+import AppMap from "../components/AppMap.vue";
 
 export default {
-  
-  components:{
+  components: {
     AppMap,
   },
 
@@ -25,26 +24,118 @@ export default {
 </script>
 
 <template>
-  <template v-if="apartment">
-    <h1>{{ apartment.title }}</h1>
-    <h5>{{ apartment.street }}</h5>
-    <img :src="this.store.baseUrl + 'storage/' + apartment.cover" alt="" />
-    <p>{{ apartment.description }}</p>
-    <div v-for="service in apartment.services" :key="service.id" class="container">
+  <div class="container">
+    <template v-if="apartment">
+      <h1>{{ apartment.title }}</h1>
+      <h5>
+        <font-awesome-icon :icon="['fas', 'map-location-dot']" class="icon" />
+        {{ apartment.street }}
+      </h5>
+      <div class="container-img">
+        <img
+          :src="this.store.baseUrl + 'storage/' + apartment.cover"
+          alt="{{ apartment.title }}"
+          class="cover"
+        />
+        <div
+          v-for="image in apartment.images"
+          :key="image.id"
+          class="img-apartment"
+        >
+          <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
+        </div>
+      </div>
+      <div class="content">
+        <h4>Descrizione</h4>
+        <p>{{ apartment.description }}</p>
+        <h4>Dimensioni: {{ apartment.size }} m<sup>2</sup></h4>
+        <h4>Camere: {{ apartment.rooms }}</h4>
+        <h4>Letti: {{ apartment.beds }}</h4>
+        <h4 class="line">Bagni: {{ apartment.bathrooms }}</h4>
+        <h4>Cosa troverai</h4>
         <ul class="list-unstyled">
-          <li>
+          <li v-for="service in apartment.services" :key="service.id">
             <font-awesome-icon :icon="['fas', 'square-check']" />
-              {{service.name}}
+            {{ service.name }}
           </li>
         </ul>
-    </div>
-
-    <div v-for="image in apartment.images" :key="image.id">
-      <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
-    </div>
-
-  <AppMap />
-  </template>
+      </div>
+    </template>
+    <AppMap />
+    <h5>{{ apartment.street }}</h5>
+  </div>
 </template>
 
-<style></style>
+<style scoped lang="scss">
+h1 {
+  font-size: 1.7rem;
+  padding-top: 1.5rem;
+}
+h5 {
+  font-size: 1.1rem;
+  padding-bottom: 1rem;
+  .icon {
+    font-size: 0.9rem;
+  }
+}
+.container-img > * {
+  width: calc((100% / 3) - 1rem);
+}
+
+.container-img {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 1.3rem;
+  .cover {
+    width: calc((100% / 3) - 1rem);
+    border-top-left-radius: 20px;
+  }
+  img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+}
+
+.img-apartment:nth-child(3) {
+  img {
+    border-top-right-radius: 20px;
+  }
+}
+
+.img-apartment:nth-child(4) {
+  img {
+    border-bottom-left-radius: 20px;
+  }
+}
+
+.img-apartment:nth-child(6) {
+  img {
+    border-bottom-right-radius: 20px;
+  }
+}
+
+.content {
+  max-width: 55%;
+}
+p,
+ul,
+.line {
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 1rem;
+}
+.list-unstyled {
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    width: 50%;
+  }
+}
+h5 {
+  padding-top: 1.5rem;
+}
+</style>

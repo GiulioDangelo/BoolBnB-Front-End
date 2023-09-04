@@ -1,8 +1,9 @@
 <script>
-	import axios from "axios";
-	import {store} from "../store";
-	import tt from "@tomtom-international/web-sdk-maps";
-	import "@tomtom-international/web-sdk-maps";
+import axios from "axios";
+import { store } from "../store";
+import tt from "@tomtom-international/web-sdk-maps";
+import "@tomtom-international/web-sdk-maps";
+
 
 	export default {
     data() {
@@ -50,14 +51,14 @@
 </script>
 
 <template>
-	<div class="tomtom">
-		<h3 class="mb-4">Map:</h3>
-		<div id="map" class="map"></div>
-	</div>
+  <div class="tomtom">
+    <h4 class="mb-4">Dove ti troverai</h4>
+    <div id="map" class="map"></div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-	.map {
-		height: 400px;
-	}
+.map {
+  height: 400px;
+}
 </style>
