@@ -3,65 +3,168 @@
 @import "@tomtom-international/web-sdk-maps";
 
 body {
-    font-family: 'Nunito', sans-serif !important;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+//Text Gradient
+
+.text-gradient {
+  background: #424172;
+  background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+//Styled Button
+
+.styled-btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 600;
+  transition: all .2s;
+  position: relative;
+  border: none;
+  background: #424172;
+}
+
+.styled-btn:before,
+.styled-btn:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #FF7210;
+  height: 108%;
+  width: 0;
+  z-index: -1;
+  transition: all .7s;
+  transform: translateY(-50%);
+}
+
+.styled-btn:before {
+  left: 0%;
+}
+
+.styled-btn:after {
+  right: 0%;
+}
+
+.styled-btn:hover {
+  color: #fff;
+  box-shadow: #de4c137f 0 30px 60px -12px inset, #5d2991 0 18px 36px -18px inset;
+  z-index: 2;
+}
+
+.styled-btn:hover::before {
+  width: 50%;
+  left: 50%;
+}
+
+.styled-btn:hover::after {
+  width: 50%;
+  right: 50%;
+}
+
+//Button
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background: #424172;
+  box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: none;
+}
+
+.button:after {
+  content: " ";
+  width: 0%;
+  height: 100%;
+  background: #ff7210;
+  position: absolute;
+  transition: all 0.4s ease-in-out;
+  right: 0;
+}
+
+.button:hover::after {
+  right: auto;
+  left: 0;
+  width: 100%;
+}
+
+.button span {
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px 17px;
+  color: #ff7210;
+  font-size: 1.125em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  z-index: 20;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover span {
+  color: #424172;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
   }
 
-  .button {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: #424172;
-    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    border: none;
+  50% {
+    transform: scale(0.95);
   }
-  
-  .button:after {
-    content: " ";
-    width: 0%;
-    height: 100%;
-    background: #ff7210;
-    position: absolute;
-    transition: all 0.4s ease-in-out;
-    right: 0;
+
+  100% {
+    transform: scale(1);
   }
-  
-  .button:hover::after {
-    right: auto;
-    left: 0;
-    width: 100%;
-  }
-  
-  .button span {
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
-    padding: 12px 17px;
-    color: #ff7210;
-    font-size: 1.125em;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    z-index: 20;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .button:hover span {
-    color: #424172;
-    animation: scaleUp 0.3s ease-in-out;
-  }
-  
-  @keyframes scaleUp {
-    0% {
-      transform: scale(1);
-    }
-  
-    50% {
-      transform: scale(0.95);
-    }
-  
-    100% {
-      transform: scale(1);
-    }
-  }
+}
+
+//Errors
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input_container_split {
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input_container.success input,
+.input_container.success select,
+.input_container_split.success input,
+.input_container.success textarea {
+  border-color: #09c372;
+}
+
+.input_container.error input,
+.input_container.error select,
+.input_container_split.error input,
+.input_container.error textarea {
+  border-color: #ff3860;
+}
+
+.input_container .error,
+.input_container_split .error {
+  background-color: white;
+  color: #ff3860;
+  text-align: end;
+  font-size: 12px;
+  height: 15px;
+}
