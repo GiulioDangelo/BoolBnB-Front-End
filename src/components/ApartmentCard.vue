@@ -36,12 +36,12 @@ export default {
 
     <div class="info d-flex flex-column align-items-center text-center">
       <h5 class="card-title my-3">{{ apartment.street }}</h5>
-      <span class="deets"> {{ apartment.size }} m2 </span>
+      <span class="deets my-2"> {{ apartment.size }} m2 </span>
     </div>
 
     <router-link
       :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
-      class="btn btn-primary mt-auto mb-3"
+      class="btn btn-primary mt-auto my-2"
       >View more</router-link
     >
   </div>
