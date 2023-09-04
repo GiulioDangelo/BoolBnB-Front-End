@@ -47,13 +47,13 @@ export default {
       </div>
       <h4>Descrizione</h4>
       <p>{{ apartment.description }}</p>
-      <div class="container d-flex">
+      <div class="container d-flex justify-content-between line">
         <div class="content-left">
           <h3>Informazioni appartamento:</h3>
           <h4>Dimensioni: {{ apartment.size }} m<sup>2</sup></h4>
           <h4>Camere: {{ apartment.rooms }}</h4>
           <h4>Letti: {{ apartment.beds }}</h4>
-          <h4 class="line">Bagni: {{ apartment.bathrooms }}</h4>
+          <h4 class="line me-2">Bagni: {{ apartment.bathrooms }}</h4>
           <h4>Cosa troverai</h4>
           <ul class="list-unstyled">
             <li v-for="service in apartment.services" :key="service.id">
@@ -63,15 +63,16 @@ export default {
           </ul>
         </div>
         <div class="content-right">
+          <h4 class="mb-4">Dove ti troverai</h4>
           <AppMap />
-          <h5>{{ apartment.street }}</h5>
+          <h5 class="mt-1">{{ apartment.street }}</h5>
         </div>
       </div>
     </template>
 
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-primary mt-3"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
       data-bs-whatever="@fat"
@@ -135,7 +136,6 @@ h1 {
 }
 h5 {
   font-size: 1.1rem;
-  padding-bottom: 1rem;
   .icon {
     font-size: 0.9rem;
   }
@@ -185,7 +185,6 @@ h5 {
   max-width: 45%;
 }
 p,
-ul,
 .line {
   border-bottom: 1px solid #dddddd;
   padding-bottom: 1rem;
@@ -210,9 +209,7 @@ h5 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  max-width: 50%;
-  margin: auto;
-  margin-top: -0.1rem;
+  max-width: 55%;
 }
 button {
   margin-bottom: 1rem;

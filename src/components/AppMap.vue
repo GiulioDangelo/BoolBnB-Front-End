@@ -50,7 +50,6 @@ export default {
 
 <template>
   <div class="tomtom">
-    <h4 class="mb-4">Dove ti troverai</h4>
     <div id="map" class="map"></div>
   </div>
 </template>
