@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import AppHome from './pages/AppHome.vue';
+import ApartmentList from './components/ApartmentList.vue'
 import AppApartmentShow from "./pages/AppApartmentShow.vue";
 import AppAboutUs from "./pages/AppAboutUs.vue";
 import AppSearch from "./pages/AppSearch.vue";
@@ -25,6 +26,11 @@ const router = createRouter({
       path: "/aboutus",
       name: "aboutus",
       component: AppAboutUs,
+    },
+    {
+      path: "/apartments",
+      name: "apartments",
+      component: ApartmentList,
     },
     {
       path: "/search",
