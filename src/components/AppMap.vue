@@ -5,45 +5,48 @@
 	import "@tomtom-international/web-sdk-maps";
 
 	export default {
-		data() {
-			return {
-				apartment: null,
-				store,
-				map: null,
-			};
-		},
+    data() {
+        return {
+            apartment: null,
+            store,
+        };
+    },
 
-		mounted() {
-			axios
-				.get(this.store.baseUrl + "api/apartments/" + this.$route.params.slug)
-				.then((response) => {
-					this.apartment = response.data.results;
+    mounted() {
+        this.map = null;
 
-					if (this.apartment.latitude && this.apartment.longitude) {
-						const latitude = parseFloat(this.apartment.latitude);
-						const longitude = parseFloat(this.apartment.longitude);
-						let center = [latitude, longitude];
+        axios
+            .get(this.store.baseUrl + "api/apartments/" + this.$route.params.slug)
+            .then((response) => {
+                this.apartment = response.data.results;
 
-						this.map = tt.map({
-							key: "bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R",
-							container: "map",
-							center: center,
-							zoom: 10,
-						});
+                if (this.apartment.latitude && this.apartment.longitude) {
+                    const latitude = parseFloat(this.apartment.latitude);
+                    const longitude = parseFloat(this.apartment.longitude);
+                    let center = [latitude, longitude];
 
-						// let marker = new tt.Marker().setLngLat(center).addTo(this.map); FIXME:
+                    this.map = tt.map({
+                        key: "bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R",
+                        container: "map",
+                        center: center,
+                        zoom: 10,
+                    });
 
-					} else {
-						console.error(
-							"I dati dell'appartamento non contengono latitudine e/o longitudine valide."
-						);
-					}
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		},
-	};
+                    this.map.on('load',() =>{
+                        let marker = new tt.Marker().setLngLat(center).addTo(this.map);
+                    })
+                } else {
+                    console.error(
+                        "I dati dell'appartamento non contengono latitudine e/o longitudine valide."
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    },
+};
+
 </script>
 
 <template>
