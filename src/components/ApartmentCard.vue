@@ -37,9 +37,17 @@ export default {
       <span class="deets"> {{ apartment.size }} m2 </span>
     </div>
 
-    <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }" class="btn btn-primary mt-auto">View
-      more</router-link>
+    <router-link
+      :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
+      class="btn btn-primary mt-auto"
+      >View more</router-link
+    >
   </div>
 </template>
 
-<style></style>
+<style scoped lang="scss">
+img {
+  width: 300px;
+  height: 250px;
+}
+</style>
