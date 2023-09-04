@@ -49,6 +49,7 @@ export default {
       <p>{{ apartment.description }}</p>
       <div class="container d-flex">
         <div class="content-left">
+          <h3>Informazioni appartamento:</h3>
           <h4>Dimensioni: {{ apartment.size }} m<sup>2</sup></h4>
           <h4>Camere: {{ apartment.rooms }}</h4>
           <h4>Letti: {{ apartment.beds }}</h4>
@@ -178,6 +179,9 @@ h5 {
 }
 
 .content-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   max-width: 45%;
 }
 p,
@@ -203,8 +207,12 @@ h5 {
   margin-top: 15em;
 }
 .content-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   max-width: 50%;
   margin: auto;
+  margin-top: -0.1rem;
 }
 button {
   margin-bottom: 1rem;
