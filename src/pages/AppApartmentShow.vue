@@ -45,24 +45,85 @@ export default {
           <img :src="this.store.baseUrl + 'storage/' + image.img_url" alt="" />
         </div>
       </div>
-      <div class="content">
-        <h4>Descrizione</h4>
-        <p>{{ apartment.description }}</p>
-        <h4>Dimensioni: {{ apartment.size }} m<sup>2</sup></h4>
-        <h4>Camere: {{ apartment.rooms }}</h4>
-        <h4>Letti: {{ apartment.beds }}</h4>
-        <h4 class="line">Bagni: {{ apartment.bathrooms }}</h4>
-        <h4>Cosa troverai</h4>
-        <ul class="list-unstyled">
-          <li v-for="service in apartment.services" :key="service.id">
-            <font-awesome-icon :icon="['fas', 'square-check']" />
-            {{ service.name }}
-          </li>
-        </ul>
+      <h4>Descrizione</h4>
+      <p>{{ apartment.description }}</p>
+      <div class="container d-flex">
+        <div class="content-left">
+          <h4>Dimensioni: {{ apartment.size }} m<sup>2</sup></h4>
+          <h4>Camere: {{ apartment.rooms }}</h4>
+          <h4>Letti: {{ apartment.beds }}</h4>
+          <h4 class="line">Bagni: {{ apartment.bathrooms }}</h4>
+          <h4>Cosa troverai</h4>
+          <ul class="list-unstyled">
+            <li v-for="service in apartment.services" :key="service.id">
+              <font-awesome-icon :icon="['fas', 'square-check']" />
+              {{ service.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="content-right">
+          <AppMap />
+          <h5>{{ apartment.street }}</h5>
+        </div>
       </div>
     </template>
-    <AppMap />
-    <h5>{{ apartment.street }}</h5>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      data-bs-whatever="@fat"
+    >
+      Contatta per Info
+    </button>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Nuovo Messaggio
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Email</label>
+                <input type="text" class="form-control" id="recipient-name" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Descrizione</label
+                >
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -116,8 +177,8 @@ h5 {
   }
 }
 
-.content {
-  max-width: 55%;
+.content-left {
+  max-width: 45%;
 }
 p,
 ul,
@@ -137,5 +198,15 @@ ul,
 }
 h5 {
   padding-top: 1.5rem;
+}
+.modal {
+  margin-top: 15em;
+}
+.content-right {
+  max-width: 50%;
+  margin: auto;
+}
+button {
+  margin-bottom: 1rem;
 }
 </style>
