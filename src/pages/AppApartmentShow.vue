@@ -12,16 +12,74 @@ export default {
     return {
       apartment: null,
       store,
+      email_sender: "",
+      text_message: "",
+      apartment_id: "",
+      isSending: false, // Aggiunto
+      showSuccess: false, // Aggiunto
+      showError: false, // Aggiunto
+      errors: [], // Aggiunto
     };
+  },
+
+  methods: {
+    sendMessage() {
+      // Verifica se è già in corso un invio
+      if (this.isSending) {
+        return;
+      }
+
+      console.log('ciao');
+
+      this.isSending = true;
+
+      let data = {
+        email_sender: this.email_sender,
+        text_message: this.text_message,
+        apartment_id: this.apartment_id,
+      };
+
+      axios
+        .post(this.store.baseUrl + "api/messages/store", data)
+        .then((response) => {
+          this.isSending = false;
+
+          if (response.data.success) {
+            this.showSuccess = true;
+            this.resetForm();
+          } else {
+            this.showError = true;
+            this.errors = response.data.errors;
+          }
+        })
+        .catch((error) => {
+          this.isSending = false;
+          console.error(error);
+        });
+    },
+    
+    // Ripulisci i campi del form dopo l'invio
+    resetForm() {
+      this.email_sender = "";
+      this.text_message = "";
+      this.apartment_id = "";
+    },
   },
 
   created() {
     axios
       .get(this.store.baseUrl + "api/apartments/" + this.$route.params.slug)
-      .then((response) => (this.apartment = response.data.results));
+      .then((response) => {
+        this.apartment = response.data.results;
+        this.apartment_id = this.apartment.id;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
+
 
 <template>
   <div class="container">
@@ -100,17 +158,18 @@ export default {
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form @submit.prevent="sendMessage()">
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Email</label>
-                <input type="text" class="form-control" id="recipient-name" />
+                <label class="col-form-label" for="email_sender">Email</label>
+                <input type="text" class="form-control" id="recipient-name"  v-model="email_sender"/>
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label"
                   >Descrizione</label
                 >
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea class="form-control" id="message-text" v-model="text_message" for="text_message" required></textarea>
               </div>
+              <input type="hidden" name="apartment_id" for="apartment_id" v-model="apartment_id">
             </form>
           </div>
           <div class="modal-footer">
@@ -121,7 +180,7 @@ export default {
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Send message</button>
+            <button type="submit" class="btn btn-primary" @click="sendMessage">Send message</button>
           </div>
         </div>
       </div>
