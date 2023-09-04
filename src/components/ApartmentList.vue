@@ -60,13 +60,15 @@
 </script>
 
 <template>
-	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-5">
-		<div class="col" v-for="apartment in arrApartments" :key="apartment.id">
-			<ApartmentCard :apartment="apartment" />
+	<div class="container">
+		<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-4" v-for="apartment in arrApartments" :key="apartment.id">
+				<ApartmentCard :apartment="apartment" />
+			</div>
 		</div>
+	
+		<div id="map" class="map mt-4 mb-1"></div>
 	</div>
-
-	<div id="map" class="map"></div>
 </template>
 
 <style lang="scss" scoped>
