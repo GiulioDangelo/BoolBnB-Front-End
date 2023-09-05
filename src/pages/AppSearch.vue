@@ -14,8 +14,8 @@ export default {
             store,
             search: "",
             arrSuggestions: [],
-            latitude: 12.70621543,
-            longitude: 41.76164637,
+            latitude: null,
+            longitude: null,
             distance: 20,
             apartmentDistance: [],
             size: 1,
@@ -24,8 +24,8 @@ export default {
             bathrooms: 1,
             arrApartments: [],
             arrServices: [],
-            selectedServices: [1, 5, 8],
-            requiredServices: [1, 5, 8],
+            selectedServices: [1],
+            requiredServices: [1],
             urlAllCountries: "https://restcountries.com/v3.1/all",
             arrCountries: [],
             country: "",
@@ -83,29 +83,12 @@ export default {
             }
             this.arrSuggestions = [];
         },
-        saveCoordinate() {
-            axios
-                .get("https://api.tomtom.com/search/2/structuredGeocode.json", {
-                    params: {
-                        language: "it-IT",
-                        limit: 1,
-                        countryCode: this.country,
-                        streetName: this.search,
-                        key: this.key
-                    }
-                })
-                .then(response => {
-                    this.latitude = response.data.results[0].position.lat;
-                    this.longitude = response.data.results[0].position.lon;
-                }).catch(error => {
-                    console.error('Request failed:', error);
-                });
-        },
         getFilteredApartments() {
             axios.get(this.store.baseUrl + "api/search", {
                 params: {
                     latitude: this.latitude,
                     longitude: this.longitude,
+                    distance: this.distance,
                     size: this.size,
                     rooms: this.rooms,
                     beds: this.beds,
@@ -118,17 +101,13 @@ export default {
                 console.error('Request failed:', error);
             });;
         },
-        startSearch() {
-            this.saveCoordinate();
-            this.getFilteredApartments();
-        }
     },
     mounted() {
         this.map = null;
 
         axios
             .get(this.store.baseUrl + "api/apartments/")
-            .then((response) => {
+            .then(response => {
                 // this.apartment = response.data.results;
                 this.arrApartments = response.data.results;
 
@@ -195,6 +174,7 @@ export default {
                             window.addEventListener('click', e => {
                                 if (li.contains(e.target)) {
                                     this.search = li.textContent;
+                                    this.saveCoordinate;
                                     this.clearSuggestions(streetList);
                                 } else {
                                     streetList.style.display = 'none';
@@ -210,6 +190,39 @@ export default {
                 }
             });
         },
+        saveCoordinate() {
+            if (this.search.length > 1) {
+                axios
+                    .get("https://api.tomtom.com/search/2/structuredGeocode.json", {
+                        params: {
+                            language: "it-IT",
+                            limit: 1,
+                            countryCode: this.country,
+                            streetName: this.search,
+                            key: this.key
+                        }
+                    })
+                    .then(response => {
+                        const result = response.data.results[0];
+                        if (result) {
+                            // Scambia latitudine e longitudine
+                            this.latitude = result.position.lon;
+                            this.longitude = result.position.lat;
+                        } else {
+                            // Gestisci il caso in cui non ci siano risultati
+                            this.latitude = null;
+                            this.longitude = null;
+                        }
+
+                        // this.latitude = response.data.results[0].position.lat;
+                        // this.longitude = response.data.results[0].position.lon;
+
+                        console.log(this.latitude, this.longitude)
+                    }).catch(error => {
+                        console.error('Request failed:', error);
+                    });
+            }
+        },
     },
     created() {
         this.getCountries();
@@ -220,7 +233,7 @@ export default {
 </script>
 
 <template>
-    <form @submit.prevent="startSearch">
+    <form @submit.prevent="getFilteredApartments">
         <div class="container d-flex flex-column gap-4">
             <h1>Ricerca Avanzata</h1>
 
@@ -234,8 +247,8 @@ export default {
 
                 <div class="container position-relative">
                     <input class="form-control" type="search" id="search" placeholder="Inserisci una città o un indirizzo"
-                        aria-label="Search" name="q" autocomplete="off" v-model.trim="search" @input="searchAutocomplete"
-                        :disabled="!country" />
+                        aria-label="Search" name="q" autocomplete="off" v-model.trim="search"
+                        @input="searchAutocomplete, saveCoordinate" :disabled="!country" />
                     <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
                         style="top: calc(100% - 15px); left: 12px">
                     </ul>
