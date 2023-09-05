@@ -12,7 +12,7 @@ export default {};
       <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
           <li class="nav-item">
-            <a class="nav-link" href="">In Evidenza</a>
+            <a class="nav-link" href="/">In Evidenza</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/search">Cerca Appartamenti</a>
