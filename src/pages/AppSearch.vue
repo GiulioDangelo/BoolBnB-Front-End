@@ -72,6 +72,8 @@ export default {
 
                     country.addEventListener('change', () => {
                         this.search = "";
+                        this.latitude = null;
+                        this.longitude = null;
                     });
                 }).catch(error => {
                     console.error('Request failed:', error);
@@ -265,25 +267,25 @@ export default {
                 <div class="row row-cols-1 row-cols-md-4">
                     <div class="container">
                         <label lass="form-label" for="size">Metri Quadrati</label>
-                        <input class="form-control" id="size" type="number" min="1" v-model.number="size"
+                        <input class="form-control" id="size" type="number" min="1" max="9999" v-model.number="size"
                             placeholder="Numero Metri Quadrati">
                     </div>
 
                     <div class="container">
                         <label lass="form-label" for="rooms">Camere</label>
-                        <input class="form-control" id="rooms" type="number" min="1" v-model.number="rooms"
+                        <input class="form-control" id="rooms" type="number" min="1" max="99" v-model.number="rooms"
                             placeholder="Numero Letti">
                     </div>
 
                     <div class="container">
                         <label lass="form-label" for="beds">Letti</label>
-                        <input class="form-control" id="beds" type="number" min="1" v-model.number="beds"
+                        <input class="form-control" id="beds" type="number" min="1" max="99" v-model.number="beds"
                             placeholder="Numero Bagni">
                     </div>
 
                     <div class="container">
                         <label lass="form-label" for="bathrooms">Bagni</label>
-                        <input class="form-control" id="bathrooms" type="number" min="1" v-model.number="bathrooms"
+                        <input class="form-control" id="bathrooms" type="number" min="1" max="99" v-model.number="bathrooms"
                             placeholder="Numero Letti">
                     </div>
                 </div>
