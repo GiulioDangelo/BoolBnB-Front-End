@@ -23,6 +23,9 @@ export default {
   },
 
   methods: {
+    reloadPage() {
+      window.location.reload();
+    },
     sendMessage() {
       // Verifica se è già in corso un invio
       if (this.isSending) {
@@ -47,6 +50,7 @@ export default {
           if (response.data.success) {
             this.showSuccess = true;
             this.resetForm();
+            this.reloadPage();
           } else {
             this.showError = true;
             this.errors = response.data.errors;
