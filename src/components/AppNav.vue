@@ -1,5 +1,28 @@
 <script>
-export default {};
+import axios from 'axios';
+import { store } from '../store';
+
+export default {
+  data() {
+    return {
+      store,
+      user: null,
+    };
+  },
+  methods: {
+    async fetchUserData() {
+      try {
+        const response = await axios.get(this.store.baseUrl + 'user');
+        this.user = response.data;
+      } catch (error) {
+        console.error('Errore nel recupero dei dati dell\'utente', error);
+      }
+    },
+  },
+  created() {
+    this.fetchUserData();
+  },
+};
 </script>
 
 <template>
@@ -10,26 +33,51 @@ export default {};
       </a>
 
       <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn gap-3">
           <li class="nav-item">
-            <a class="nav-link" href="/">In Evidenza</a>
+            <button class="home-link">
+              <a href="/">Home</a>
+            </button>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/search">Cerca Appartamenti</a>
+            <button class="search-link">
+              <a href="/search">Cerca Appartamenti</a>
+            </button>
+          </li>
+        </ul>
+
+        <ul v-if="user" class="navbar-nav mb-lg-0 log-btn">
+          <li class="nav-item">
+            <a class="nav-link" :href="store.baseUrl + 'admin/dashboard'">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" :href="store.baseUrl + 'admin/messages'">Messaggi</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              I Miei Appartamenti
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" :href="store.baseUrl + 'admin/apartments'">Lista
+                  Appartamenti</a></li>
+              <li><a class="dropdown-item" :href="store.baseUrl + 'admin/create'">Aggiungi
+                  Appartamento</a></li>
+            </ul>
           </li>
         </ul>
 
         <div class="log-btn">
           <div class="d-flex gap-2">
             <button class="login-link">
-              <a href="http://localhost:8000/login">Accedi</a>
+              <a :href="store.baseUrl + 'login'">Accedi</a>
             </button>
             <div class="border border-1 border-dark"></div>
             <button class="register-link">
-              <a href="http://localhost:8000/register">Registrati</a>
+              <a :href="store.baseUrl + 'register'">Registrati</a>
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </nav>
@@ -67,6 +115,8 @@ a img {
   width: 120px;
 }
 
+.home-link,
+.search-link,
 .login-link,
 .register-link {
   padding: 0;
@@ -75,10 +125,12 @@ a img {
   background: none;
 }
 
+.home-link,
+.search-link,
 .login-link,
 .register-link {
   --primary-color: #424172;
-  --hovered-color: #ff7210;
+  --hovered-color: #FF7210;
   position: relative;
   display: flex;
   font-weight: 600;
@@ -86,13 +138,17 @@ a img {
   align-items: center;
 }
 
+.home-link a,
+.search-link a,
 .login-link a,
 .register-link a {
   margin: 0;
   position: relative;
-  color: var(--primary-color);
+  color: var(--primary-color)
 }
 
+.home-link a::before,
+.search-link a::before,
 .login-link a::before,
 .register-link a::before {
   position: absolute;
@@ -103,6 +159,14 @@ a img {
   transition: 0.3s ease-out;
 }
 
+.home-link a::before {
+  content: "Home";
+}
+
+.search-link a::before {
+  content: "Cerca\00a0 Appartamenti";
+}
+
 .login-link a::before {
   content: "Accedi";
 }
@@ -111,16 +175,22 @@ a img {
   content: "Registrati";
 }
 
+.home-link a:hover,
+.search-link a:hover,
 .login-link a:hover,
 .register-link a:hover {
   text-decoration: none;
 }
 
+.home-link:hover::after,
+.search-link:hover::after,
 .login-link:hover::after,
 .register-link::after {
   width: 100%;
 }
 
+.home-link:hover a::before,
+.search-link:hover a::before,
 .login-link:hover a::before,
 .register-link:hover a::before {
   width: 100%;
