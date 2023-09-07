@@ -94,11 +94,14 @@ export default {
         {{ apartment.street }}
       </h5>
       <div class="container-img">
-        <img
+        <div class="img-apartment">
+          <img
           :src="this.store.baseUrl + 'storage/' + apartment.cover"
           alt="{{ apartment.title }}"
           class="cover"
         />
+        </div>
+        
         <div
           v-for="image in apartment.images"
           :key="image.id"
@@ -134,7 +137,7 @@ export default {
 
     <button
       type="button"
-      class="btn btn-primary mt-3"
+      class="styled-btn mt-3"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
       data-bs-whatever="@fat"
@@ -184,7 +187,7 @@ export default {
             >
               Close
             </button>
-            <button type="submit" class="btn btn-primary" @click="sendMessage">Send message</button>
+            <button type="submit" class="styled-btn" @click="sendMessage">Send message</button>
           </div>
         </div>
       </div>
@@ -212,33 +215,34 @@ h5 {
   flex-wrap: wrap;
   gap: 0.5rem;
   padding-bottom: 1.3rem;
-  .cover {
-    width: calc((100% / 3) - 1rem);
-    border-top-left-radius: 20px;
-  }
   img {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 }
-
-.img-apartment:nth-child(3) {
-  img {
-    border-top-right-radius: 20px;
+.img-apartment{
+  overflow: hidden;
+  &:hover img{
+    transform: scale(1.2);
+    
+    cursor: grab;
   }
+}
+.img-apartment:nth-child(1) {
+    border-top-left-radius: 20px;
+}
+.img-apartment:nth-child(3) {
+    border-top-right-radius: 20px;
 }
 
 .img-apartment:nth-child(4) {
-  img {
     border-bottom-left-radius: 20px;
-  }
 }
 
 .img-apartment:nth-child(6) {
-  img {
     border-bottom-right-radius: 20px;
-  }
 }
 
 .content-left {
