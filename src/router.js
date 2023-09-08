@@ -5,8 +5,7 @@ import ApartmentList from './components/ApartmentList.vue'
 import AppApartmentShow from "./pages/AppApartmentShow.vue";
 import AppAboutUs from "./pages/AppAboutUs.vue";
 import AppSearch from "./pages/AppSearch.vue";
-import AppMessage from "./pages/AppMessage.vue";
-import AppSponsor from "./pages/AppSponsor.vue";
+import AppCity from "./pages/AppCity.vue"
 import App404 from "./pages/App404.vue";
 
 const router = createRouter({
@@ -38,14 +37,9 @@ const router = createRouter({
       component: AppSearch,
     },
     {
-      path: "/message",
-      name: "message",
-      component: AppMessage,
-    },
-    {
-      path: "/sponsor",
-      name: "sponsor",
-      component: AppSponsor,
+      path: "/city",
+      name: "city",
+      component: AppCity,
     },
     {
       path: "/:pathMatch(.*)*",
