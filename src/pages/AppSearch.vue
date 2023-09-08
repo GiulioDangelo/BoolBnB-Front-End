@@ -293,7 +293,7 @@ export default {
 
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                    <div v-for=" service  in    arrServices   " :key="service.id" class="form-check mb-2">
+                    <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" :id="service.id" :value="service.id"
                             v-model="selectedServices" :disabled="requiredServices.includes(service.id)">
                         <label :for="service.id" class="form-check-label">{{ service.name }}</label>
@@ -310,7 +310,7 @@ export default {
     </form>
 
     <div class="container">
-        <div class="row d-flex justify-content-center align-items-center">
+        <div class="row d-flex justify-content-center align-items-center card-container">
             <div class="col-4" v-for="apartment in arrApartments" :key="apartment.id">
                 <ApartmentCard :apartment="apartment" />
             </div>
@@ -337,5 +337,9 @@ export default {
 .list-group-item:hover {
     text-decoration: underline;
     background-color: #f8f9fa !important;
+}
+
+@media screen and (max-width: 767px) {
+
 }
 </style>

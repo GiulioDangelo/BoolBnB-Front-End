@@ -54,10 +54,6 @@ img {
   object-fit: cover;
 }
 
-.card{
-  height: 450px;
-}
-
 .img-container{
   width: 100%;
 }

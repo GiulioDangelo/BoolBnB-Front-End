@@ -56,8 +56,19 @@ export default {
 
 <style lang="scss" scoped>
 .map {
-  height: 400px;
-  width: 600px;
+  height: 100%;
+  width: 100%;
   border-radius: 8px;
+}
+
+.tomtom{
+  height: 400px;
+}
+
+@media screen and (max-width:766px) {
+  .map{
+    height: 400px;
+    width: 100%;
+  }
 }
 </style>
