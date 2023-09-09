@@ -46,19 +46,37 @@ export default {
 </script>
 
 <template>
+
+   <!-- <section v-for="(apartment, index) in arrApartments.slice(
+            currentIndex,
+            currentIndex + 3
+          )" :key="index">
+          <div v-if="apartment.active_sponsors.length!=0">
+
+            {{ apartment.title }}
+          </div>
+
+        </section> -->
+
   <div class="container">
     <h1>In evidenza</h1>
+    <!-- <div v-for="apartment in arrApartments" :key="apartment.id">
+    <div v-if="apartment.active_sponsors.length!=0">
+          
+          </div>
+          </div> -->
+
 
     <div id="carouselExampleCaptions" class="carousel slide">
       <!-- Carousel Items -->
       <div class="carousel-inner">
+    
         <div
-          v-for="(apartment, index) in arrApartments.slice(
-            currentIndex,
-            currentIndex + 3
-          )"
-          :key="index"
+        v-for="apartment in arrApartments" :key="apartment.id"
         >
+        <div v-if="apartment.active_sponsors.length!=0">
+
+        
           <img
             :src="this.store.baseUrl + 'storage/' + apartment.cover"
             alt=""
@@ -76,9 +94,10 @@ export default {
             >
           </div>
         </div>
+        </div>
       </div>
 
-      <!-- Carousel Controls -->
+
       <button
         class="carousel-control-prev"
         type="button"
