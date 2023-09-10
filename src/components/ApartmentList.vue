@@ -22,7 +22,7 @@ export default {
 
 		axios
 			.get(this.store.backendURL + "api/apartments/")
-			.then((response) => {
+			.then(response => {
 				// this.apartment = response.data.results;
 				this.arrApartments = response.data.results;
 
@@ -34,7 +34,7 @@ export default {
 						zoom: 3,
 					});
 
-					this.arrApartments.forEach((apartment) => {
+					this.arrApartments.forEach(apartment => {
 						if (apartment.latitude && apartment.longitude) {
 							this.map.on("load", () => {
 								let latitude = parseFloat(apartment.latitude);
@@ -52,9 +52,7 @@ export default {
 					);
 				}
 			})
-			.catch((error) => {
-				console.error(error);
-			});
+			.catch(error => console.error(error));
 	},
 };
 </script>

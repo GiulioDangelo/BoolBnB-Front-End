@@ -1,6 +1,7 @@
 <script>
 export default {};
 </script>
+
 <template>
   <footer class="footer" style="background-color: #434172">
     <div class="container py-5">

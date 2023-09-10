@@ -17,7 +17,7 @@ export default {
 
     axios
       .get(this.store.backendURL + "api/apartments/" + this.$route.params.slug)
-      .then((response) => {
+      .then(response => {
         this.apartment = response.data.results;
 
         if (this.apartment.latitude && this.apartment.longitude) {
@@ -41,9 +41,7 @@ export default {
           );
         }
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => console.error(error));
   },
 };
 </script>
