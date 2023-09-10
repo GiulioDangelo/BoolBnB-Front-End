@@ -16,7 +16,7 @@ export default {
     this.map = null;
 
     axios
-      .get(this.store.baseUrl + "api/apartments/" + this.$route.params.slug)
+      .get(this.store.backendURL + "api/apartments/" + this.$route.params.slug)
       .then((response) => {
         this.apartment = response.data.results;
 
@@ -61,12 +61,12 @@ export default {
   border-radius: 8px;
 }
 
-.tomtom{
+.tomtom {
   height: 400px;
 }
 
 @media screen and (max-width:766px) {
-  .map{
+  .map {
     height: 400px;
     width: 100%;
   }

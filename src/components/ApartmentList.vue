@@ -21,7 +21,7 @@ export default {
 		this.map = null;
 
 		axios
-			.get(this.store.baseUrl + "api/apartments/")
+			.get(this.store.backendURL + "api/apartments/")
 			.then((response) => {
 				// this.apartment = response.data.results;
 				this.arrApartments = response.data.results;

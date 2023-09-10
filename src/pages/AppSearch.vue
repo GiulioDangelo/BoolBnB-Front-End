@@ -34,14 +34,14 @@ export default {
     },
     methods: {
         getAllApartments() {
-            axios.get(this.store.baseUrl + "api/apartments").then(response => {
+            axios.get(this.store.backendURL + "api/apartments").then(response => {
                 this.arrApartments = response.data.results;
             }).catch(error => {
                 console.error('Request failed:', error);
             });;
         },
         getAllServices() {
-            axios.get(this.store.baseUrl + "api/services").then(response => {
+            axios.get(this.store.backendURL + "api/services").then(response => {
                 this.arrServices = response.data.results;
             }).catch(error => {
                 console.error('Request failed:', error);
@@ -86,7 +86,7 @@ export default {
             this.arrSuggestions = [];
         },
         getFilteredApartments() {
-            axios.get(this.store.baseUrl + "api/search", {
+            axios.get(this.store.backendURL + "api/search", {
                 params: {
                     latitude: this.latitude,
                     longitude: this.longitude,
@@ -108,7 +108,7 @@ export default {
         this.map = null;
 
         axios
-            .get(this.store.baseUrl + "api/apartments/")
+            .get(this.store.backendURL + "api/apartments/")
             .then(response => {
                 // this.apartment = response.data.results;
                 this.arrApartments = response.data.results;
@@ -339,7 +339,5 @@ export default {
     background-color: #f8f9fa !important;
 }
 
-@media screen and (max-width: 767px) {
-
-}
+@media screen and (max-width: 767px) {}
 </style>

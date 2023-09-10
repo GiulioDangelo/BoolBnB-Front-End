@@ -16,8 +16,8 @@ export default {
   methods: {
     getImageUrl(image) {
       return image
-        ? this.store.baseUrl + "storage/" + image
-        : this.store.baseUrl + "storage/default.jpg";
+        ? this.store.backendURL + "storage/" + image
+        : this.store.backendURL + "storage/default.jpg";
     },
   },
 };
@@ -26,7 +26,7 @@ export default {
 <template>
   <div class="card d-flex align-items-center justify-content-center mt-5">
     <div class="img-container">
-      <img :src="getImageUrl(apartment.cover)" alt=""/> 
+      <img :src="getImageUrl(apartment.cover)" alt="" />
     </div>
     <div class="mg mt-3">
       <div class="group">
@@ -39,11 +39,8 @@ export default {
       <span class="deets my-2"> {{ apartment.size }} m2 </span>
     </div>
 
-    <router-link
-      :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
-      class="btn btn-primary mt-auto my-2"
-      >View more</router-link
-    >
+    <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
+      class="btn btn-primary mt-auto my-2">View more</router-link>
   </div>
 </template>
 
@@ -54,7 +51,7 @@ img {
   object-fit: cover;
 }
 
-.img-container{
+.img-container {
   width: 100%;
 }
 </style>
