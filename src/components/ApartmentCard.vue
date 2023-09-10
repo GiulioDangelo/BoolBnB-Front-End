@@ -40,7 +40,7 @@ export default {
     </div>
 
     <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
-      class="btn btn-primary mt-auto my-2">View more</router-link>
+      class="btn btn-primary mt-auto my-2">Guarda</router-link>
   </div>
 </template>
 
