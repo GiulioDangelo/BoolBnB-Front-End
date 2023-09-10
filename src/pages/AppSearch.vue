@@ -449,6 +449,7 @@ export default {
                 <h1>Ricerca Avanzata</h1>
 
                 <div class="row row-cols-1 row-cols-md-2">
+                    <!-- Country -->
                     <div class="input_container">
                         <select id="country" class="form-select" name="country" ref="country" v-model="country"
                             @input="validate">
@@ -457,6 +458,7 @@ export default {
                         <div class="error"></div>
                     </div>
 
+                    <!-- Address -->
                     <div class="input_container">
                         <input class="form-control" type="text" id="address"
                             placeholder="Inserisci una città o un indirizzo" aria-label="address" name="q"
@@ -470,6 +472,7 @@ export default {
                     </div>
                 </div>
 
+                <!-- Distance -->
                 <div class="input_container_split">
                     <input type="range" class="form-range" id="distance" ref="distance" v-model.number="distance">
                     <input type="number" class="align-self-end" id="distance" min="1" max="100" ref="distance" step="1"
@@ -516,6 +519,7 @@ export default {
                     </div>
                 </div>
 
+                <!-- Services -->
                 <div class="container">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
@@ -537,7 +541,10 @@ export default {
 
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center card-container">
-            <div class="col-4" v-for="apartment in arrApartments" :key="apartment.id">
+            <div v-if="arrApartments === undefined" class="col-12 text-center">
+                <h2 class="text-gradient m-0">Nessuno risultato trovato</h2>
+            </div>
+            <div v-else class="col-4" v-for="apartment in arrApartments" :key="apartment.id">
                 <ApartmentCard :apartment="apartment" />
             </div>
         </div>
