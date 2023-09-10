@@ -101,7 +101,7 @@ export default {
 <style lang="scss">
 .navbar {
   height: 70px;
-  position: fixed;
+  position: fixed !important;
   left: 0;
   top: 0;
   z-index: 99;

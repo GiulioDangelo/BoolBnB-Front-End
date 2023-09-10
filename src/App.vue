@@ -11,7 +11,9 @@ export default {
 
 <template>
   <AppNav />
-  <router-view></router-view>
+  <main style="margin-top: 100px;">
+    <router-view></router-view>
+  </main>
   <AppFooter />
 </template>
 

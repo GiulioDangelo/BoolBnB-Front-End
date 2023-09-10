@@ -1,6 +1,7 @@
 <script>
 export default {};
 </script>
+
 <template>
   <footer class="footer" style="background-color: #434172">
     <div class="container py-5">
@@ -24,16 +25,10 @@ export default {};
               <font-awesome-icon :icon="['fab', 'instagram']" />
             </li>
             <li class="list-inline-item">
-              <font-awesome-icon
-                icon="fa-brands fa-square-twitter"
-                class="icon_social twitter"
-              />
+              <font-awesome-icon icon="fa-brands fa-square-twitter" class="icon_social twitter" />
             </li>
             <li class="list-inline-item">
-              <font-awesome-icon
-                icon="fa-brands fa-square-youtube"
-                class="icon_social youtube"
-              />
+              <font-awesome-icon icon="fa-brands fa-square-youtube" class="icon_social youtube" />
             </li>
             <li class="list-inline-item">
               <font-awesome-icon :icon="['fab', 'linkedin']" />
@@ -57,6 +52,7 @@ export default {};
 .footer {
   color: #f66f17;
 }
+
 a {
   text-decoration: none;
   color: #f66f17;

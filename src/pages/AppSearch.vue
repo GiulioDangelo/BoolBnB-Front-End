@@ -235,79 +235,81 @@ export default {
 </script>
 
 <template>
-    <form @submit.prevent="getFilteredApartments">
-        <div class="container d-flex flex-column gap-4">
-            <h1>Ricerca Avanzata</h1>
+    <div class="container">
+        <form @submit.prevent="getFilteredApartments">
+            <div class="container d-flex flex-column gap-4">
+                <h1>Ricerca Avanzata</h1>
 
-            <div class="row row-cols-1 row-cols-md-2">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="container">
+                        <select id="country" class="form-select" name="country" v-model="country">
+                            <option value="">Seleziona Nazione</option>
+                        </select>
+                        <div class="error"></div>
+                    </div>
+
+                    <div class="container position-relative">
+                        <input class="form-control" type="search" id="search"
+                            placeholder="Inserisci una città o un indirizzo" aria-label="Search" name="q" autocomplete="off"
+                            v-model.trim="search" @input="searchAutocomplete, saveCoordinate" :disabled="!country" />
+                        <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
+                            style="top: calc(100% - 15px); left: 12px">
+                        </ul>
+                        <div class="error"></div>
+                    </div>
+                </div>
+
                 <div class="container">
-                    <select id="country" class="form-select" name="country" v-model="country">
-                        <option value="">Seleziona Nazione</option>
-                    </select>
-                    <div class="error"></div>
+                    <input type="range" class="form-range" id="range" min="1" max="100" v-model.number="distance">
+                    <input type="number" class="" id="form-number" min="1" max="100" step="1" v-model.number="distance">
                 </div>
 
-                <div class="container position-relative">
-                    <input class="form-control" type="search" id="search" placeholder="Inserisci una città o un indirizzo"
-                        aria-label="Search" name="q" autocomplete="off" v-model.trim="search"
-                        @input="searchAutocomplete, saveCoordinate" :disabled="!country" />
-                    <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
-                        style="top: calc(100% - 15px); left: 12px">
-                    </ul>
-                    <div class="error"></div>
-                </div>
-            </div>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-4">
+                        <div class="container">
+                            <label lass="form-label" for="size">Metri Quadrati</label>
+                            <input class="form-control" id="size" type="number" min="1" max="9999" v-model.number="size"
+                                placeholder="Numero Metri Quadrati">
+                        </div>
 
-            <div class="container">
-                <input type="range" class="form-range" id="range" min="1" max="100" v-model.number="distance">
-                <input type="number" class="" id="form-number" min="1" max="100" step="1" v-model.number="distance">
-            </div>
+                        <div class="container">
+                            <label lass="form-label" for="rooms">Camere</label>
+                            <input class="form-control" id="rooms" type="number" min="1" max="99" v-model.number="rooms"
+                                placeholder="Numero Letti">
+                        </div>
 
-            <div class="container">
-                <div class="row row-cols-1 row-cols-md-4">
-                    <div class="container">
-                        <label lass="form-label" for="size">Metri Quadrati</label>
-                        <input class="form-control" id="size" type="number" min="1" max="9999" v-model.number="size"
-                            placeholder="Numero Metri Quadrati">
-                    </div>
+                        <div class="container">
+                            <label lass="form-label" for="beds">Letti</label>
+                            <input class="form-control" id="beds" type="number" min="1" max="99" v-model.number="beds"
+                                placeholder="Numero Bagni">
+                        </div>
 
-                    <div class="container">
-                        <label lass="form-label" for="rooms">Camere</label>
-                        <input class="form-control" id="rooms" type="number" min="1" max="99" v-model.number="rooms"
-                            placeholder="Numero Letti">
-                    </div>
-
-                    <div class="container">
-                        <label lass="form-label" for="beds">Letti</label>
-                        <input class="form-control" id="beds" type="number" min="1" max="99" v-model.number="beds"
-                            placeholder="Numero Bagni">
-                    </div>
-
-                    <div class="container">
-                        <label lass="form-label" for="bathrooms">Bagni</label>
-                        <input class="form-control" id="bathrooms" type="number" min="1" max="99" v-model.number="bathrooms"
-                            placeholder="Numero Letti">
+                        <div class="container">
+                            <label lass="form-label" for="bathrooms">Bagni</label>
+                            <input class="form-control" id="bathrooms" type="number" min="1" max="99"
+                                v-model.number="bathrooms" placeholder="Numero Letti">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                    <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" :id="service.id" :value="service.id"
-                            v-model="selectedServices" :disabled="requiredServices.includes(service.id)">
-                        <label :for="service.id" class="form-check-label">{{ service.name }}</label>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                        <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
+                            <input type="checkbox" class="form-check-input" :id="service.id" :value="service.id"
+                                v-model="selectedServices" :disabled="requiredServices.includes(service.id)">
+                            <label :for="service.id" class="form-check-label">{{ service.name }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="styled-btn">Cerca Appartamenti</button>
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="styled-btn">Cerca Appartamenti</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center card-container">
