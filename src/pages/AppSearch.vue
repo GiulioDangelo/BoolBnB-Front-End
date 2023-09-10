@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             store,
-            search: "",
+            address: "",
             arrSuggestions: [],
             latitude: null,
             longitude: null,
@@ -24,8 +24,8 @@ export default {
             bathrooms: 1,
             arrApartments: [],
             arrServices: [],
-            selectedServices: [1],
-            requiredServices: [1],
+            selectedServices: [1, 8],
+            requiredServices: [1, 8],
             urlAllCountries: "https://restcountries.com/v3.1/all",
             arrCountries: [],
             country: "",
@@ -71,9 +71,15 @@ export default {
                     });
 
                     country.addEventListener('change', () => {
-                        this.search = "";
+                        this.address = "";
                         this.latitude = null;
                         this.longitude = null;
+
+                        if (this.country === "") {
+                            this.setSuccess(this.$refs.address);
+                        } else {
+                            this.setError(this.$refs.address, "Campo richiesto");
+                        }
                     });
                 }).catch(error => {
                     console.error('Request failed:', error);
@@ -85,23 +91,229 @@ export default {
             }
             this.arrSuggestions = [];
         },
-        getFilteredApartments() {
-            axios.get(this.store.backendURL + "api/search", {
-                params: {
-                    latitude: this.latitude,
-                    longitude: this.longitude,
-                    distance: this.distance,
-                    size: this.size,
-                    rooms: this.rooms,
-                    beds: this.beds,
-                    bathrooms: this.bathrooms,
-                    services: this.selectedServices,
-                },
-            }).then(response => {
-                this.arrApartments = response.data.results;
-            }).catch(error => {
-                console.error('Request failed:', error);
-            });;
+        getFilteredApartments(event) {
+            if (!this.validateForm()) {
+                event.preventDefault();
+            } else {
+                axios.get(this.store.backendURL + "api/search", {
+                    params: {
+                        latitude: this.latitude,
+                        longitude: this.longitude,
+                        distance: this.distance,
+                        size: this.size,
+                        rooms: this.rooms,
+                        beds: this.beds,
+                        bathrooms: this.bathrooms,
+                        services: this.selectedServices,
+                    },
+                }).then(response => {
+                    this.arrApartments = response.data.results;
+                }).catch(error => {
+                    console.error('Request failed:', error);
+                });;
+            }
+        },
+        validateForm() {
+            let isValid = true;
+
+            const country = this.$refs.country;
+            const address = this.$refs.address;
+            const distance = this.$refs.distance;
+
+            const size = this.$refs.size;
+            const rooms = this.$refs.rooms;
+            const beds = this.$refs.beds;
+            const bathrooms = this.$refs.bathrooms;
+
+            // Country
+            this.setSuccess(country);
+
+            // Address
+            if (this.country === "") {
+                this.setSuccess(address);
+            } else {
+                if (this.address.length < 2) {
+                    this.setError(address, 'Minino 2 caratteri');
+                    isValid = false;
+                } else if (this.address.length > 255) {
+                    this.setError(address, 'Massimo 255 caratteri');
+                    isValid = false;
+                } else {
+                    this.setSuccess(address);
+                }
+            }
+
+            // Distance
+            if (this.distance === '') {
+                this.setError(distance, 'Numero richiesto');
+                isValid = false;
+            } else if (this.distance < 1) {
+                this.setError(distance, 'Minino 1');
+                isValid = false;
+            } else if (this.distance > 100) {
+                this.setError(distance, 'Massimo 100');
+                isValid = false;
+            } else {
+                this.setSuccess(distance);
+            }
+
+            // Size
+            if (this.size === '') {
+                this.setError(size, 'Numero richiesto');
+                isValid = false;
+            } else if (this.size < 1) {
+                this.setError(size, 'Minino 1');
+                isValid = false;
+            } else if (this.size > 9999) {
+                this.setError(size, 'Massimo 9999');
+                isValid = false;
+            } else {
+                this.setSuccess(size);
+            }
+
+            // Rooms
+            if (this.rooms === '') {
+                this.setError(rooms, 'Numero richiesto');
+                isValid = false;
+            } else if (this.rooms < 1) {
+                this.setError(rooms, 'Minino 1');
+                isValid = false;
+            } else if (this.rooms > 99) {
+                this.setError(rooms, 'Massimo 99');
+                isValid = false;
+            } else {
+                this.setSuccess(rooms);
+            }
+
+            // Beds
+            if (this.beds === '') {
+                this.setError(beds, 'Numero richiesto');
+                isValid = false;
+            } else if (this.beds < 1) {
+                this.setError(beds, 'Minino 1');
+                isValid = false;
+            } else if (this.beds > 99) {
+                this.setError(beds, 'Massimo 99');
+                isValid = false;
+            } else {
+                this.setSuccess(beds);
+            }
+
+            // Bathrooms
+            if (this.bathrooms === '') {
+                this.setError(bathrooms, 'Numero richiesto');
+                isValid = false;
+            } else if (this.bathrooms < 1) {
+                this.setError(bathrooms, 'Minino 1');
+                isValid = false;
+            } else if (this.bathrooms > 99) {
+                this.setError(bathrooms, 'Massimo 99');
+                isValid = false;
+            } else {
+                this.setSuccess(bathrooms);
+            }
+
+            return isValid;
+        },
+        validate(event) {
+            const element = event.target;
+
+            switch (element.id) {
+                case "country":
+                    this.setSuccess(element);
+                    break;
+
+                case "address":
+                    if (this.address.length < 2) {
+                        this.setError(element, 'Minino 2 caratteri');
+                    } else if (this.address.length > 255) {
+                        this.setError(element, 'Massimo 255 caratteri');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+
+                case "distance":
+                    if (this.distance === '') {
+                        this.setError(element, 'Numero richiesto');
+                    } else if (this.distance < 1) {
+                        this.setError(element, 'Minino 1');
+                    } else if (this.distance > 100) {
+                        this.setError(element, 'Massimo 100');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+
+                case "size":
+                    if (this.size === '') {
+                        this.setError(element, 'Numero richiesto');
+                    } else if (this.size < 1) {
+                        this.setError(element, 'Minino 1');
+                    } else if (this.size > 9999) {
+                        this.setError(element, 'Massimo 9999');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+
+                case "rooms":
+                    if (this.rooms === '') {
+                        this.setError(element, 'Numero richiesto');
+                    } else if (this.rooms < 1) {
+                        this.setError(element, 'Minino 1');
+                    } else if (this.rooms > 99) {
+                        this.setError(element, 'Massimo 99');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+
+                case "beds":
+                    if (this.beds === '') {
+                        this.setError(element, 'Numero richiesto');
+                    } else if (this.beds < 1) {
+                        this.setError(element, 'Minino 1');
+                    } else if (this.beds > 99) {
+                        this.setError(element, 'Massimo 99');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+
+                case "bathrooms":
+                    if (this.bathrooms === '') {
+                        this.setError(element, 'Numero richiesto');
+                    } else if (this.bathrooms < 1) {
+                        this.setError(element, 'Minino 1');
+                    } else if (this.bathrooms > 99) {
+                        this.setError(element, 'Massimo 99');
+                    } else {
+                        this.setSuccess(element);
+                    }
+                    break;
+            }
+        },
+        setError(element, message) {
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector('.error');
+
+            errorDisplay.innerText = message;
+            inputControl.classList.add('error');
+            inputControl.classList.remove('success');
+        },
+        setSuccess(element) {
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector('.error');
+
+            errorDisplay.innerText = '';
+            inputControl.classList.add('success');
+            inputControl.classList.remove('error');
+        },
+        preventFormSubmitOnEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
         },
     },
     mounted() {
@@ -139,20 +351,18 @@ export default {
                     );
                 }
             })
-            .catch((error) => {
-                console.error(error);
-            });
+            .catch(error => console.error(error));
     },
     computed: {
-        searchAutocomplete() {
+        addressAutocomplete() {
             const streetList = document.getElementById('suggestions-street');
-            const input = document.getElementById('search');
+            const input = document.getElementById('address');
 
             input.addEventListener("input", () => {
                 delete axios.defaults.headers.common['X-Requested-With'];
 
-                if (this.search && this.country) {
-                    axios.get("https://api.tomtom.com/search/2/search/" + this.search + '.json', {
+                if (this.address && this.country) {
+                    axios.get("https://api.tomtom.com/search/2/search/" + this.address + '.json', {
                         params: {
                             typeahead: true,
                             countrySet: this.country,
@@ -175,7 +385,7 @@ export default {
 
                             window.addEventListener('click', e => {
                                 if (li.contains(e.target)) {
-                                    this.search = li.textContent;
+                                    this.address = li.textContent;
                                     this.saveCoordinate;
                                     this.clearSuggestions(streetList);
                                 } else {
@@ -193,14 +403,14 @@ export default {
             });
         },
         saveCoordinate() {
-            if (this.search.length > 1) {
+            if (this.address.length > 1) {
                 axios
                     .get("https://api.tomtom.com/search/2/structuredGeocode.json", {
                         params: {
                             language: "it-IT",
                             limit: 1,
                             countryCode: this.country,
-                            streetName: this.search,
+                            streetName: this.address,
                             key: this.key
                         }
                     })
@@ -219,10 +429,8 @@ export default {
                         // this.latitude = response.data.results[0].position.lat;
                         // this.longitude = response.data.results[0].position.lon;
 
-                        console.log(this.latitude, this.longitude)
-                    }).catch(error => {
-                        console.error('Request failed:', error);
-                    });
+                        // console.log(this.latitude, this.longitude)
+                    }).catch(error => console.error('Request failed:', error));
             }
         },
     },
@@ -241,17 +449,20 @@ export default {
                 <h1>Ricerca Avanzata</h1>
 
                 <div class="row row-cols-1 row-cols-md-2">
-                    <div class="container">
-                        <select id="country" class="form-select" name="country" v-model="country">
+                    <div class="input_container">
+                        <select id="country" class="form-select" name="country" ref="country" v-model="country"
+                            @input="validate">
                             <option value="">Seleziona Nazione</option>
                         </select>
                         <div class="error"></div>
                     </div>
 
-                    <div class="container position-relative">
-                        <input class="form-control" type="search" id="search"
-                            placeholder="Inserisci una città o un indirizzo" aria-label="Search" name="q" autocomplete="off"
-                            v-model.trim="search" @input="searchAutocomplete, saveCoordinate" :disabled="!country" />
+                    <div class="input_container">
+                        <input class="form-control" type="text" id="address"
+                            placeholder="Inserisci una città o un indirizzo" aria-label="address" name="q"
+                            autocomplete="off" ref="address" v-model.trim="address"
+                            @input="validate($event) + addressAutocomplete + saveCoordinate" :disabled="!country"
+                            @keydown.enter.prevent="preventFormSubmitOnEnter" />
                         <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
                             style="top: calc(100% - 15px); left: 12px">
                         </ul>
@@ -259,35 +470,48 @@ export default {
                     </div>
                 </div>
 
-                <div class="container">
-                    <input type="range" class="form-range" id="range" min="1" max="100" v-model.number="distance">
-                    <input type="number" class="" id="form-number" min="1" max="100" step="1" v-model.number="distance">
+                <div class="input_container_split">
+                    <input type="range" class="form-range" id="distance" ref="distance" v-model.number="distance">
+                    <input type="number" class="align-self-end" id="distance" min="1" max="100" ref="distance" step="1"
+                        v-model.number="distance" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
+                    <div class="error"></div>
                 </div>
 
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-4">
-                        <div class="container">
-                            <label lass="form-label" for="size">Metri Quadrati</label>
-                            <input class="form-control" id="size" type="number" min="1" max="9999" v-model.number="size"
-                                placeholder="Numero Metri Quadrati">
+
+                        <!-- Size -->
+                        <div class="input_container_split">
+                            <label lass="form-label" for="size">Dimesioni</label>
+                            <input class="form-control" id="size" type="number" placeholder="Numero in metri quadrati"
+                                ref="size" v-model.number="size" @input="validate"
+                                @keydown.enter.prevent="preventFormSubmitOnEnter">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="container">
+                        <!-- Rooms -->
+                        <div class="input_container_split">
                             <label lass="form-label" for="rooms">Camere</label>
-                            <input class="form-control" id="rooms" type="number" min="1" max="99" v-model.number="rooms"
-                                placeholder="Numero Letti">
+                            <input class="form-control" id="rooms" type="number" placeholder="Numero Camere" ref="rooms"
+                                v-model.number="rooms" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="container">
+                        <!-- Beds -->
+                        <div class="input_container_split">
                             <label lass="form-label" for="beds">Letti</label>
-                            <input class="form-control" id="beds" type="number" min="1" max="99" v-model.number="beds"
-                                placeholder="Numero Bagni">
+                            <input class="form-control" id="beds" type="number" placeholder="Numero Letti" ref="beds"
+                                v-model.number="beds" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="container">
+                        <!-- Bathrooms -->
+                        <div class="input_container_split">
                             <label lass="form-label" for="bathrooms">Bagni</label>
-                            <input class="form-control" id="bathrooms" type="number" min="1" max="99"
-                                v-model.number="bathrooms" placeholder="Numero Letti">
+                            <input class="form-control" id="bathrooms" type="number" placeholder="Numero Bagni"
+                                ref="bathrooms" v-model.number="bathrooms" @input="validate"
+                                @keydown.enter.prevent="preventFormSubmitOnEnter">
+                            <div class="error"></div>
                         </div>
                     </div>
                 </div>
