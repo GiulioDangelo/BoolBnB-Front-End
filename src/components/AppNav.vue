@@ -1,83 +1,98 @@
 <script>
-import axios from 'axios';
 import { store } from '../store';
 
 export default {
   data() {
     return {
       store,
-      user: null,
-    };
-  },
-  methods: {
-    async fetchUserData() {
-      try {
-        const response = await axios.get(this.store.baseUrl + 'user');
-        this.user = response.data;
-      } catch (error) {
-        console.error('Errore nel recupero dei dati dell\'utente', error);
-      }
-    },
-  },
-  created() {
-    this.fetchUserData();
-  },
+    }
+  }
 };
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg w-100 bg-white">
+  <nav class="navbar navbar-expand-lg w-100">
     <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="../assets/img/multicolor-horizontal-logo.png" alt="" />
-      </a>
+      <div class="w-100 d-flex justify-content-between px-0">
+        <a class="navbar-brand" :href="store.frontendURL">
+          <img class="full-logo" src="../assets/img/multicolor-horizontal-logo.png" alt="">
+          <img class="icon-logo" src="../assets/img/multicolor-logo.ico" alt="">
+        </a>
 
-      <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn gap-3">
-          <li class="nav-item">
-            <button class="home-link">
-              <a href="/">Home</a>
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="search-link">
-              <a href="/search">Cerca Appartamenti</a>
-            </button>
-          </li>
-        </ul>
+        <div class="w-100 d-flex justify-content-end align-center gap-4">
 
-        <ul v-if="user" class="navbar-nav mb-lg-0 log-btn">
-          <li class="nav-item">
-            <a class="nav-link" :href="store.baseUrl + 'admin/dashboard'">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" :href="store.baseUrl + 'admin/messages'">Messaggi</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              I Miei Appartamenti
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" :href="store.baseUrl + 'admin/apartments'">Lista
-                  Appartamenti</a></li>
-              <li><a class="dropdown-item" :href="store.baseUrl + 'admin/create'">Aggiungi
-                  Appartamento</a></li>
+          <a class="link-unstyled d-flex align-center" :href="store.frontendURL + 'search'">
+            <button class="button text-gradient">
+              <span><font-awesome-icon :icon="['fas', 'magnifying-glass']" /> <span class="disapear">Cerca</span></span>
+            </button>
+          </a>
+
+          <!-- <div class="nav-item dropdown h-100">
+            <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="text-gradient"><i class="fa-regular fa-user"></i>
+                <span class="disapear">Profilo</span></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
+              <li class="nav-item">
+                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/dashboard'"><i
+                    class="fa-solid fa-list"></i>
+                  Dashboard</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="nav-item">
+                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/apartments'">
+                  <i class="fa-solid fa-house-user" style="color: #666666;"></i>
+                  Appartamenti</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="nav-item">
+                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/messages'"><i
+                    class="fa-regular fa-message"></i>
+                  Messaggi</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="nav-item">
+                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/sponsors'"><i
+                    class="fa-regular fa-star"></i>
+                  Sponsorizza</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="m-0 p-0">
+                <form :action="store.backendURL + 'logout'" method="post" class="dropdown-item exit mb-0">
+                  @csrf
+                  <button class="btn p-0 text-danger pe-auto">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
+                  </button>
+                </form>
+              </li>
             </ul>
-          </li>
-        </ul>
+          </div> -->
 
-        <div class="log-btn">
           <div class="d-flex gap-2">
-            <button class="login-link">
-              <a :href="store.baseUrl + 'login'">Accedi</a>
-            </button>
+            <a class="link-unstyled d-flex align-center" :href="store.backendURL + 'login'">
+              <button class="button text-gradient">
+                <span><font-awesome-icon :icon="['fas', 'user-lock']" /></span> <span class="disapear">Accedi</span>
+              </button>
+            </a>
             <div class="border border-1 border-dark"></div>
-            <button class="register-link">
-              <a :href="store.baseUrl + 'register'">Registrati</a>
-            </button>
-          </div>
-        </div>
 
+            <a class="link-unstyled d-flex align-center" :href="store.backendURL + 'register'">
+              <button class="button text-gradient">
+                <span><font-awesome-icon :icon="['fas', 'user-plus']" /></span> <span class="disapear">Registrati</span>
+              </button>
+            </a>
+
+          </div>
+
+        </div>
       </div>
     </div>
   </nav>
@@ -90,109 +105,48 @@ export default {
   left: 0;
   top: 0;
   z-index: 99;
-  border-bottom: 1px solid #ff7210;
+  background-color: #fdfdfd;
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
 }
 
-.log-btn a {
-  text-decoration: none;
-}
-
-.log-btn a:hover {
-  color: #424172;
-}
-
-.log-btn a:hover,
-.exit:hover button {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.auth {
-  color: #ff7210;
-}
-
-a img {
-  width: 120px;
-}
-
-.home-link,
-.search-link,
-.login-link,
-.register-link {
-  padding: 0;
-  margin: 0;
+.dropdown-menu {
   border: none;
-  background: none;
+  border-radius: 6px
 }
 
-.home-link,
-.search-link,
-.login-link,
-.register-link {
-  --primary-color: #424172;
-  --hovered-color: #FF7210;
-  position: relative;
-  display: flex;
-  font-weight: 600;
-  gap: 0.5rem;
-  align-items: center;
+.full-logo,
+.icon-logo {
+  height: 30px;
 }
 
-.home-link a,
-.search-link a,
-.login-link a,
-.register-link a {
-  margin: 0;
-  position: relative;
-  color: var(--primary-color)
+.full-logo {
+  display: block;
 }
 
-.home-link a::before,
-.search-link a::before,
-.login-link a::before,
-.register-link a::before {
-  position: absolute;
-  width: 0%;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
+.icon-logo {
+  display: none;
 }
 
-.home-link a::before {
-  content: "Home";
-}
+@media screen and (max-width: 575px) {
+  .disapear {
+    display: none;
+  }
 
-.search-link a::before {
-  content: "Cerca\00a0 Appartamenti";
-}
+  .nav-link {
+    background: #424172;
+    background: repeating-radial-gradient(circle farthest-corner at top left,
+        #424172 0%,
+        #ff7210 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.login-link a::before {
-  content: "Accedi";
-}
+  .full-logo {
+    display: none;
+  }
 
-.register-link a::before {
-  content: "Registrati";
-}
-
-.home-link a:hover,
-.search-link a:hover,
-.login-link a:hover,
-.register-link a:hover {
-  text-decoration: none;
-}
-
-.home-link:hover::after,
-.search-link:hover::after,
-.login-link:hover::after,
-.register-link::after {
-  width: 100%;
-}
-
-.home-link:hover a::before,
-.search-link:hover a::before,
-.login-link:hover a::before,
-.register-link:hover a::before {
-  width: 100%;
+  .icon-logo {
+    display: block;
+  }
 }
 </style>
