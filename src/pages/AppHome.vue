@@ -1,12 +1,9 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import apartmentList from "../components/ApartmentList.vue";
 
 export default {
-  components: {
-    apartmentList,
-  },
+  components: {},
 
   data() {
     return {
@@ -115,11 +112,6 @@ export default {
   </div>
 
   <div class="container">
-    <h2 class="mt-5 py-5">I nostri appartmenti</h2>
-    <apartmentList />
-  </div>
-
-  <div class="container">
     <h2 class="mt-5">Mete piu' richieste</h2>
     <div class="row mb-5">
       <div class="col-6 city-container">
@@ -214,5 +206,8 @@ h5 {
 
 .berlino {
   border-bottom-right-radius: 20px;
+}
+.ourapartments {
+  padding-top: 2rem;
 }
 </style>
