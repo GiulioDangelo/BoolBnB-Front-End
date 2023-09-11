@@ -39,8 +39,11 @@ export default {
       <span class="deets my-2"> {{ apartment.size }} m2 </span>
     </div>
 
-    <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
-      class="btn btn-primary mt-auto my-2">Guarda</router-link>
+    <router-link
+      :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
+      class="btn btn-primary mt-auto my-2"
+      >Guarda</router-link
+    >
   </div>
 </template>
 
@@ -49,9 +52,13 @@ img {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .img-container {
   width: 100%;
+}
+.card {
+  border-radius: 8px;
 }
 </style>
