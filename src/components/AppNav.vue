@@ -12,11 +12,11 @@ export default {
 
 <template>
   <nav class="navbar navbar-expand-lg w-100">
-    <div class="container">
-      <div class="w-100 d-flex justify-content-between px-0">
+    <div class="container h-100">
+      <div class="w-100 d-flex justify-content-between px-0 h-100">
         <a class="navbar-brand" :href="store.frontendURL">
           <img class="full-logo" src="../assets/img/multicolor-horizontal-logo.png" alt="">
-          <img class="icon-logo" src="../assets/img/multicolor-logo.ico" alt="">
+          <img class="icon-logo h-100" src="../assets/img/multicolor-logo.ico" alt="">
         </a>
 
         <div class="w-100 d-flex justify-content-end align-center gap-4">
@@ -70,28 +70,29 @@ export default {
 <style lang="scss">
 .navbar {
   height: 70px;
-  position: fixed !important;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 99;
-  background-color: #fdfdfd;
-  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ff7210;
 }
 
-.dropdown-menu {
-  .log-btn a {
-    text-decoration: none;
-  }
+.log-btn a {
+  text-decoration: none;
+}
 
-  .log-btn a:hover {
-    color: #424172;
-  }
+.log-btn a:hover {
+  color: #424172;
+}
 
-  .log-btn a:hover,
-  .exit:hover button {
-    cursor: pointer;
-    text-decoration: underline;
-  }
+.log-btn a:hover,
+.exit:hover button {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.icon-logo{
+  display: none;
 }
 
 .auth {
@@ -110,21 +111,7 @@ a img {
   padding: 0;
   margin: 0;
   border: none;
-  border-radius: 6px;
-}
-
-.full-logo,
-.icon-logo {
-  height: 30px;
-}
-
-.full-logo {
-  display: block;
-  object-fit: contain;
-}
-
-.icon-logo {
-  display: none;
+  background: none;
 }
 
 .home-link,
@@ -148,7 +135,7 @@ a img {
 .register-link a {
   margin: 0;
   position: relative;
-  color: var(--primary-color);
+  color: var(--primary-color)
 }
 
 .home-link a::before,
@@ -164,27 +151,12 @@ a img {
   transition: 0.3s ease-out;
 }
 
-@media screen and (max-width: 575px) {
-  .disappear {
-    display: none;
-  }
+.home-link a::before {
+  content: "Home";
+}
 
-  .nav-link {
-    background: #424172;
-    background: repeating-radial-gradient(circle farthest-corner at top left,
-      #424172 0%,
-      #ff7210 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .full-logo {
-    display: none;
-  }
-
-  .icon-logo {
-    display: block;
-  }
+.search-link a::before {
+  content: "Cerca\00a0 Appartamenti";
 }
 
 .aboutus-link a::before {
@@ -221,5 +193,20 @@ a img {
 .login-link:hover a::before,
 .register-link:hover a::before {
   width: 100%;
+}
+
+@media screen and (max-width: 504px) {
+  .icon-logo{
+    display: block;
+    object-fit: contain;
+  }
+
+  .full-logo{
+    display: none;
+  }
+
+  .container{
+    height: 100%;
+  }
 }
 </style>
