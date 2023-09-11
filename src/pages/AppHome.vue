@@ -44,13 +44,19 @@ export default {
             breakpoints: {
               1: {
               itemsToShow: 1,
+              snapAlign: 'center'
             },
-            // 700px and up
-            700: {
+            500: {
+              itemsToShow: 2,
+              snapAlign: 'center'
+            },
+            768: {
               itemsToShow: 2.5,
+              snapAlign: 'center'
             },
             1400: {
               itemsToShow: 3,
+              snapAlign: 'center'
             },
           },
         }
@@ -68,7 +74,7 @@ export default {
       <a @click=myCarousel.next class="next mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-right']" /></a>
     </div>
 
-    <Carousel :wrap-around="true" autoplay="2000" ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
+    <Carousel :wrap-around="true" autoplay="3000"  ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
       <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
         <div class="caurosel-items">
           <img
@@ -86,7 +92,7 @@ export default {
 
   <div class="container">
     <h2 class="mt-5 py-5">I nostri appartmenti</h2>
-    <apartmentList />
+    <apartmentList/>
   </div>
 
   <div class="container">
@@ -135,6 +141,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-inline: 5px;
 }
 
 .caurosel-img {
