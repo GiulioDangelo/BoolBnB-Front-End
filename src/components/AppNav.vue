@@ -27,55 +27,6 @@ export default {
             </button>
           </a>
 
-          <!-- <div class="nav-item dropdown h-100">
-            <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="text-gradient"><i class="fa-regular fa-user"></i>
-                <span class="disapear">Profilo</span></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/dashboard'"><i
-                    class="fa-solid fa-list"></i>
-                  Dashboard</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/apartments'">
-                  <i class="fa-solid fa-house-user" style="color: #666666;"></i>
-                  Appartamenti</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/messages'"><i
-                    class="fa-regular fa-message"></i>
-                  Messaggi</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/sponsors'"><i
-                    class="fa-regular fa-star"></i>
-                  Sponsorizza</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="m-0 p-0">
-                <form :action="store.backendURL + 'logout'" method="post" class="dropdown-item exit mb-0">
-                  @csrf
-                  <button class="btn p-0 text-danger pe-auto">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
-                  </button>
-                </form>
-              </li>
-            </ul>
-          </div> -->
-
           <div class="d-flex gap-2">
             <a class="link-unstyled d-flex align-center" :href="store.backendURL + 'login'">
               <button class="button text-gradient">
@@ -106,7 +57,7 @@ export default {
   top: 0;
   z-index: 99;
   background-color: #fdfdfd;
-  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.3);
 }
 
 .dropdown-menu {
