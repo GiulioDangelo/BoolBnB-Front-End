@@ -20,79 +20,31 @@ export default {
         </a>
 
         <div class="w-100 d-flex justify-content-end align-center gap-4">
-      <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn gap-3">
-          <li class="nav-item">
-            <button class="home-link">
-              <a href="/">Home</a>
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="search-link">
-              <a href="/search">Cerca Appartamenti</a>
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="aboutus-link">
-              <a href="/aboutus">About Us</a>
-            </button>
-          </li>
-        </ul>
+          <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn gap-3">
+              <li class="nav-item">
+                <button class="home-link">
+                  <a href="/">Home</a>
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="search-link">
+                  <a href="/search">Cerca Appartamenti</a>
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="aboutus-link">
+                  <a href="/aboutus">About Us</a>
+                </button>
+              </li>
+            </ul>
+          </div>
 
           <a class="link-unstyled d-flex align-center" :href="store.frontendURL + 'search'">
             <button class="button text-gradient">
               <span><font-awesome-icon :icon="['fas', 'magnifying-glass']" /> <span class="disapear">Cerca</span></span>
             </button>
           </a>
-
-          <!-- <div class="nav-item dropdown h-100">
-            <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="text-gradient"><i class="fa-regular fa-user"></i>
-                <span class="disapear">Profilo</span></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/dashboard'"><i
-                    class="fa-solid fa-list"></i>
-                  Dashboard</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/apartments'">
-                  <i class="fa-solid fa-house-user" style="color: #666666;"></i>
-                  Appartamenti</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/messages'"><i
-                    class="fa-regular fa-message"></i>
-                  Messaggi</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="nav-item">
-                <a class="w-100 nav-link px-3 py-1" :href="store.backendURL + 'admin/sponsors'"><i
-                    class="fa-regular fa-star"></i>
-                  Sponsorizza</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="m-0 p-0">
-                <form :action="store.backendURL + 'logout'" method="post" class="dropdown-item exit mb-0">
-                  @csrf
-                  <button class="btn p-0 text-danger pe-auto">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
-                  </button>
-                </form>
-              </li>
-            </ul>
-          </div> -->
 
           <div class="d-flex gap-2">
             <a class="link-unstyled d-flex align-center" :href="store.backendURL + 'login'">
@@ -107,16 +59,14 @@ export default {
                 <span><font-awesome-icon :icon="['fas', 'user-plus']" /></span> <span class="disapear">Registrati</span>
               </button>
             </a>
-
           </div>
-
         </div>
       </div>
     </div>
   </nav>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .navbar {
   height: 70px;
   position: fixed !important;
@@ -128,18 +78,19 @@ export default {
 }
 
 .dropdown-menu {
-.log-btn a {
-  text-decoration: none;
-}
+  .log-btn a {
+    text-decoration: none;
+  }
 
-.log-btn a:hover {
-  color: #424172;
-}
+  .log-btn a:hover {
+    color: #424172;
+  }
 
-.log-btn a:hover,
-.exit:hover button {
-  cursor: pointer;
-  text-decoration: underline;
+  .log-btn a:hover,
+  .exit:hover button {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
 
 .auth {
@@ -158,7 +109,7 @@ a img {
   padding: 0;
   margin: 0;
   border: none;
-  border-radius: 6px
+  border-radius: 6px;
 }
 
 .full-logo,
@@ -168,10 +119,13 @@ a img {
 
 .full-logo {
   display: block;
+  object-fit: contain;
 }
 
 .icon-logo {
   display: none;
+}
+
 .home-link,
 .search-link,
 .aboutus-link,
@@ -193,7 +147,7 @@ a img {
 .register-link a {
   margin: 0;
   position: relative;
-  color: var(--primary-color)
+  color: var(--primary-color);
 }
 
 .home-link a::before,
@@ -210,15 +164,15 @@ a img {
 }
 
 @media screen and (max-width: 575px) {
-  .disapear {
+  .disappear {
     display: none;
   }
 
   .nav-link {
     background: #424172;
     background: repeating-radial-gradient(circle farthest-corner at top left,
-        #424172 0%,
-        #ff7210 100%);
+      #424172 0%,
+      #ff7210 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -230,6 +184,8 @@ a img {
   .icon-logo {
     display: block;
   }
+}
+
 .aboutus-link a::before {
   content: "About\00a0 Us";
 }
