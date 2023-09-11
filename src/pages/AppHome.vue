@@ -17,20 +17,23 @@ export default {
   data() {
     return {
       arrApartments: [],
+      sponsoredApartments: [],
       store,
       currentIndex: 0,
     };
   },
 
   mounted() {
-  axios
-    .get(this.store.backendURL + "api/apartments/", {
-      params: {
-        active_sponsors: true // Aggiungi il parametro per filtrare gli appartamenti con uno sponsor attivo
-      }
-    })
-    .then((response) => (this.arrApartments = response.data.results))
-    .catch((error) => console.error(error));
+    axios
+      .get(this.store.backendURL + "api/apartments/")
+      .then((response) => {
+        this.arrApartments = response.data.results;
+
+        this.sponsoredApartments = this.arrApartments.filter(apartment => apartment.active_sponsors.length !== 0);
+
+        console.log(this.sponsoredApartments);
+      })
+      .catch((error) => console.error(error));
   },
 
   setup() {
@@ -38,12 +41,20 @@ export default {
 
         return {
             myCarousel,
+            breakpoints: {
+              1: {
+              itemsToShow: 1,
+            },
+            // 700px and up
+            700: {
+              itemsToShow: 2.5,
+            },
+            1400: {
+              itemsToShow: 3,
+            },
+          },
         }
     },
-
-  methods: {
-
-  },
 };
 </script>
 
@@ -52,14 +63,22 @@ export default {
     <h1>In evidenza</h1>
 
 
-    <Carousel :items-to-show="2.5" :wrap-around="true" ref="myCarousel">
-      <Slide v-for="apartment in arrApartments" :key="apartment.id">
+    <div class="carousel-btn d-flex justify-content-end">
+      <a @click=myCarousel.prev class="prev mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-left']" /></a>
+      <a @click=myCarousel.next class="next mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-right']" /></a>
+    </div>
+
+    <Carousel :wrap-around="true" autoplay="2000" ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
+      <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
+        <div class="caurosel-items">
           <img
-                v-if="apartment.active_sponsors.length != 0"
                 :src="this.store.backendURL + 'storage/' + apartment.cover"
                 alt=""
                 class="caurosel-img"
               />
+              <h5>{{ apartment.title }}</h5>
+              <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }" class="btn btn-primary mt-auto my-2">View more</router-link>
+        </div>
       </Slide>
     </Carousel>
 
@@ -112,33 +131,16 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.carousel-inner {
-  display: flex;
-  height: 300px;
-  border-radius: 30px;
-}
-
-.container-btn {
-  position: relative;
+.caurosel-items{
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: 80px;
-  color: white;
-
-  .btn {
-    margin: auto;
-  }
 }
 
 .caurosel-img {
   width: 100%;
   height: 300px;
   object-fit: cover;
-}
-
-h5 {
-  text-shadow: 0 2px 0 black;
 }
 
 .city-container {
