@@ -1,17 +1,16 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import apartmentList from "../components/ApartmentList.vue";
+import ApartmentList from "../components/Apartmentlist.vue"
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { ref } from 'vue'
 
 export default {
   components: {
-    apartmentList,
+    ApartmentList,
     Carousel,
     Slide,
-    Navigation,
   },
 
   data() {
@@ -30,8 +29,6 @@ export default {
         this.arrApartments = response.data.results;
 
         this.sponsoredApartments = this.arrApartments.filter(apartment => apartment.active_sponsors.length !== 0);
-
-        console.log(this.sponsoredApartments);
       })
       .catch((error) => console.error(error));
   },
@@ -42,21 +39,17 @@ export default {
         return {
             myCarousel,
             breakpoints: {
-              1: {
+              100: {
               itemsToShow: 1,
-              snapAlign: 'center'
             },
             500: {
               itemsToShow: 2,
-              snapAlign: 'center'
             },
             768: {
               itemsToShow: 2.5,
-              snapAlign: 'center'
             },
             1400: {
               itemsToShow: 3,
-              snapAlign: 'center'
             },
           },
         }
@@ -74,7 +67,7 @@ export default {
       <a @click=myCarousel.next class="next mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-right']" /></a>
     </div>
 
-    <Carousel :wrap-around="true" autoplay="3000"  ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
+    <Carousel :wrap-around="true" :autoplay=3000  ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
       <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
         <div class="caurosel-items">
           <img
@@ -92,7 +85,7 @@ export default {
 
   <div class="container">
     <h2 class="mt-5 py-5 text-gradient">I nostri appartmenti</h2>
-    <apartmentList/>
+    <ApartmentList/>
   </div>
 
   <div class="container">
