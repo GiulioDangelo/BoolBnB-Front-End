@@ -66,7 +66,8 @@ export default {
   </nav>
 </template>
 
-<style lang="scss" scoped>
+
+<style lang="scss">
 .navbar {
   height: 70px;
   position: fixed !important;
