@@ -1,7 +1,7 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
-import ApartmentList from "../components/Apartmentlist.vue"
+import ApartmentList from "../components/ApartmentList.vue"
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { ref } from 'vue'

@@ -191,7 +191,7 @@ export default {
 <template>
   <div class="container">
     <template v-if="apartment">
-      <h1>{{ apartment.title }}</h1>
+      <h1 class="text-gradient" style="margin-top: -2em; font-size: 40px;">{{ apartment.title }}</h1>
       <h5>
         <font-awesome-icon :icon="['fas', 'map-location-dot']" class="icon" />
         {{ apartment.street }}
