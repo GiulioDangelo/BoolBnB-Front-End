@@ -44,6 +44,11 @@ export default {
               <a href="/search">Cerca Appartamenti</a>
             </button>
           </li>
+          <li class="nav-item">
+            <button class="aboutus-link">
+              <a href="/aboutus">About Us</a>
+            </button>
+          </li>
         </ul>
 
         <ul v-if="user" class="navbar-nav mb-lg-0 log-btn">
@@ -117,6 +122,7 @@ a img {
 
 .home-link,
 .search-link,
+.aboutus-link,
 .login-link,
 .register-link {
   padding: 0;
@@ -127,6 +133,7 @@ a img {
 
 .home-link,
 .search-link,
+.aboutus-link,
 .login-link,
 .register-link {
   --primary-color: #424172;
@@ -140,6 +147,7 @@ a img {
 
 .home-link a,
 .search-link a,
+.aboutus-link a,
 .login-link a,
 .register-link a {
   margin: 0;
@@ -149,6 +157,7 @@ a img {
 
 .home-link a::before,
 .search-link a::before,
+.aboutus-link a::before,
 .login-link a::before,
 .register-link a::before {
   position: absolute;
@@ -167,6 +176,10 @@ a img {
   content: "Cerca\00a0 Appartamenti";
 }
 
+.aboutus-link a::before {
+  content: "About\00a0 Us";
+}
+
 .login-link a::before {
   content: "Accedi";
 }
@@ -177,6 +190,7 @@ a img {
 
 .home-link a:hover,
 .search-link a:hover,
+.aboutus-link a:hover,
 .login-link a:hover,
 .register-link a:hover {
   text-decoration: none;
@@ -184,6 +198,7 @@ a img {
 
 .home-link:hover::after,
 .search-link:hover::after,
+.aboutus-link:hover::after,
 .login-link:hover::after,
 .register-link::after {
   width: 100%;
@@ -191,6 +206,7 @@ a img {
 
 .home-link:hover a::before,
 .search-link:hover a::before,
+.aboutus-link:hover a::before,
 .login-link:hover a::before,
 .register-link:hover a::before {
   width: 100%;
