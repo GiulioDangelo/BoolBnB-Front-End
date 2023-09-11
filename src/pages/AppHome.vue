@@ -5,12 +5,13 @@ import ApartmentList from "../components/ApartmentList.vue"
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { ref } from 'vue'
-
+import Loader from "./Loader.vue";
 export default {
   components: {
     ApartmentList,
     Carousel,
     Slide,
+    Loader,
   },
 
   data() {
@@ -19,18 +20,30 @@ export default {
       sponsoredApartments: [],
       store,
       currentIndex: 0,
+      loading: false,
     };
   },
+  
 
-  mounted() {
+  methods: {
+    fetchData() {
+      this.loading = true;
+    
     axios
       .get(this.store.backendURL + "api/apartments/")
       .then((response) => {
         this.arrApartments = response.data.results;
-
         this.sponsoredApartments = this.arrApartments.filter(apartment => apartment.active_sponsors.length !== 0);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => {
+        this.loading = false;
+      })
+    },
+  },
+
+  mounted(){
+    this.fetchData();
   },
 
   setup() {
@@ -58,6 +71,9 @@ export default {
 </script>
 
 <template>
+  <div>
+<Loader v-if="loading" />
+<router-view>
   <div class="container">
     <h1 class="text-gradient">In evidenza</h1>
 
@@ -127,6 +143,8 @@ export default {
       </div>
     </div>
   </div>
+</router-view>
+</div>
 </template>
 
 <style lang="scss" scoped>

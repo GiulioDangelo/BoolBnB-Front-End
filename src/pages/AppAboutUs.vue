@@ -1,5 +1,14 @@
 <script>
+import Loader from './Loader.vue';
 export default {
+    components: {
+        Loader,
+    },
+    data(){
+        return{
+            loading: true,
+        }
+    },
     methods: {
         pageInt() {
             var elements_to_watch = document.querySelectorAll('.watch')
@@ -31,6 +40,7 @@ export default {
 </script>
 
 <template>
+    <Loader v-if="!loading" />
     <img src="../assets/img/mare.jpg" alt="mare" class="img-bg">
     <div class="section watch">
         <div class="au-card">

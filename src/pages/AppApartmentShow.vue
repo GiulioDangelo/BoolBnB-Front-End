@@ -2,10 +2,12 @@
 import axios from "axios";
 import { store } from "../store";
 import AppMap from "../components/AppMap.vue";
+import Loader from "./Loader.vue";
 
 export default {
   components: {
     AppMap,
+	Loader,
   },
 
   data() {
@@ -19,6 +21,7 @@ export default {
       showSuccess: false, // Aggiunto
       showError: false, // Aggiunto
       errors: [], // Aggiunto
+	  loading: false,
     };
   },
 
@@ -177,11 +180,13 @@ export default {
   },
 
   created() {
+	this.loading = true;
     axios
       .get(this.store.backendURL + "api/apartments/" + this.$route.params.slug)
       .then((response) => {
         this.apartment = response.data.results;
         this.apartment_id = this.apartment.id;
+		this.loading = false;
       })
       .catch((error) => console.log(error));
   },
@@ -189,6 +194,7 @@ export default {
 </script>
 
 <template>
+	<Loader v-if="loading" />
   <div class="container">
     <template v-if="apartment">
       <h1 class="text-gradient" style="margin-top: -2em; font-size: 40px;">{{ apartment.title }}</h1>
