@@ -88,6 +88,7 @@ export default {
   </nav>
 </template>
 
+
 <style lang="scss">
 .navbar {
   height: 70px;
