@@ -74,7 +74,8 @@ export default {
   left: 0;
   top: 0;
   z-index: 99;
-  border-bottom: 1px solid #ff7210;
+  background-color: #fdfdfd;
+  box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.3);
 }
 
 .log-btn a {
