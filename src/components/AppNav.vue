@@ -23,16 +23,6 @@ export default {
           <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn gap-3">
               <li class="nav-item">
-                <button class="home-link">
-                  <a href="/">Home</a>
-                </button>
-              </li>
-              <li class="nav-item">
-                <button class="search-link">
-                  <a href="/search">Cerca Appartamenti</a>
-                </button>
-              </li>
-              <li class="nav-item">
                 <button class="aboutus-link">
                   <a href="/aboutus">About Us</a>
                 </button>
