@@ -1,9 +1,18 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
+import apartmentList from "../components/ApartmentList.vue";
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import 'vue3-carousel/dist/carousel.css'
+import { ref } from 'vue'
 
 export default {
-  components: {},
+  components: {
+    apartmentList,
+    Carousel,
+    Slide,
+    Navigation,
+  },
 
   data() {
     return {
@@ -14,101 +23,51 @@ export default {
   },
 
   mounted() {
-    axios
-      .get(this.store.backendURL + "api/apartments/")
-      .then((response) => (this.arrApartments = response.data.results))
-      .catch((error) => console.error(error));
-  },
-  methods: {
-    handleCarouselNavigation(direction) {
-      if (direction === "previous") {
-        // Decrementa l'indice corrente delle immagini
-        this.currentIndex--;
-
-        // Gestisci il caso in cui l'utente si trovi alla prima immagine
-        if (this.currentIndex < 0) {
-          this.currentIndex = this.arrApartments.length - 3;
-        }
-      } else if (direction === "next") {
-        // Incrementa l'indice corrente delle immagini
-        this.currentIndex++;
-
-        // Gestisci il caso in cui l'utente si trovi all'ultima immagine
-        if (this.currentIndex > this.arrApartments.length - 3) {
-          this.currentIndex = 0;
-        }
+  axios
+    .get(this.store.backendURL + "api/apartments/", {
+      params: {
+        active_sponsors: true // Aggiungi il parametro per filtrare gli appartamenti con uno sponsor attivo
       }
+    })
+    .then((response) => (this.arrApartments = response.data.results))
+    .catch((error) => console.error(error));
+  },
+
+  setup() {
+        const myCarousel = ref(null);
+
+        return {
+            myCarousel,
+        }
     },
+
+  methods: {
+
   },
 };
 </script>
 
 <template>
-  <!-- <section v-for="(apartment, index) in arrApartments.slice(
-            currentIndex,
-            currentIndex + 3
-          )" :key="index">
-          <div v-if="apartment.active_sponsors.length!=0">
-
-            {{ apartment.title }}
-          </div>
-
-        </section> -->
-
   <div class="container">
     <h1>In evidenza</h1>
-    <!-- <div v-for="apartment in arrApartments" :key="apartment.id">
-    <div v-if="apartment.active_sponsors.length!=0">
-          
-          </div>
-          </div> -->
 
-    <div id="carouselExampleCaptions" class="carousel slide">
-      <!-- Carousel Items -->
-      <div class="carousel-inner">
-        <div v-for="apartment in arrApartments" :key="apartment.id">
-          <div v-if="apartment.active_sponsors.length != 0">
-            <img
-              :src="this.store.backendURL + 'storage/' + apartment.cover"
-              alt=""
-              class="caurosel-img"
-            />
-            <div class="container-btn">
-              <h5>{{ apartment.title }}</h5>
-              <router-link
-                :to="{
-                  name: 'apartments.show',
-                  params: { slug: apartment.slug },
-                }"
-                class="btn btn-primary mt-auto my-2"
-                >View more</router-link
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="prev"
-      @click="handleCarouselNavigation('previous')"
-    >
-      <span class="carousel-control-prev-icon prev" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="next"
-      @click="handleCarouselNavigation('next')"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <Carousel :items-to-show="2.5" :wrap-around="true" ref="myCarousel">
+      <Slide v-for="apartment in arrApartments" :key="apartment.id">
+          <img
+                v-if="apartment.active_sponsors.length != 0"
+                :src="this.store.backendURL + 'storage/' + apartment.cover"
+                alt=""
+                class="caurosel-img"
+              />
+      </Slide>
+    </Carousel>
+
+</div> 
+
+  <div class="container">
+    <h2 class="mt-5 py-5">I nostri appartmenti</h2>
+    <apartmentList />
   </div>
 
   <div class="container">
@@ -206,8 +165,5 @@ h5 {
 
 .berlino {
   border-bottom-right-radius: 20px;
-}
-.ourapartments {
-  padding-top: 2rem;
 }
 </style>
