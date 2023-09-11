@@ -196,26 +196,25 @@ export default {
         <font-awesome-icon :icon="['fas', 'map-location-dot']" class="icon" />
         {{ apartment.street }}
       </h5>
-      <div class="container-img">
-        <div class="img-apartment">
-          <img
-            :src="this.store.backendURL + 'storage/' + apartment.cover"
-            alt="{{ apartment.title }}"
-            class="cover"
-          />
-        </div>
 
-        <div
-          v-for="image in apartment.images"
-          :key="image.id"
-          class="img-apartment"
-        >
-          <img
-            :src="this.store.backendURL + 'storage/' + image.img_url"
-            alt=""
-          />
+      <div class="container container-img px-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+          <div class="img-apartment">
+            <div class="overflow-hidden">
+              <img :src="this.store.backendURL + 'storage/' + apartment.cover" :alt="apartment.title + 'copertina'"
+                class="cover" />
+            </div>
+          </div>
+
+          <div class="img-apartment" v-for="image, i in apartment.images" :key="image.id"
+            :alt="apartment.title + 'immagine' + i">
+            <div class="overflow-hidden">
+              <img :src="this.store.backendURL + 'storage/' + image.img_url" alt="" />
+            </div>
+          </div>
         </div>
       </div>
+
       <h4>Descrizione</h4>
       <p>{{ apartment.description }}</p>
       <div class="row d-flex justify-content-between line info-container">
@@ -241,98 +240,44 @@ export default {
       </div>
     </template>
 
-    <button
-      type="button"
-      class="styled-btn mt-3"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      data-bs-whatever="@fat"
-    >
+    <button type="button" class="styled-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      data-bs-whatever="@fat">
       Contatta per Info
     </button>
 
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1
-              v-if="!showSuccess"
-              class="modal-title fs-5"
-              id="exampleModalLabel"
-            >
+            <h1 v-if="!showSuccess" class="modal-title fs-5" id="exampleModalLabel">
               Nuovo Messaggio
             </h1>
             <h1 v-if="showSuccess" class="m-0">Messaggio Inviato</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div v-if="!showSuccess" class="modal-body">
             <form @submit.prevent="sendMessage()">
               <div class="input_container">
-                <label class="input_label text-gradient" for="email_sender"
-                  >Email</label
-                >
+                <label class="input_label text-gradient" for="email_sender">Email</label>
                 <font-awesome-icon :icon="['fas', 'envelope']" class="icon" />
-                <input
-                  type="email"
-                  class="input_field"
-                  id="email_sender"
-                  v-model="email_sender"
-                  ref="email"
-                  @input="validate"
-                  @keydown.enter.prevent="preventFormSubmitOnEnter"
-                  autocomplete="email"
-                />
+                <input type="email" class="input_field" id="email_sender" v-model="email_sender" ref="email"
+                  @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter" autocomplete="email" />
                 <div class="error"></div>
               </div>
               <div class="input_container">
-                <label for="text_message" class="input_label text-gradient"
-                  >Descrizione</label
-                >
-                <textarea
-                  class="form-control"
-                  id="text_message"
-                  rows="3"
-                  v-model="text_message"
-                  ref="message"
-                  @input="validate"
-                  @keydown.enter.prevent="preventFormSubmitOnEnter"
-                  for="text_message"
-                ></textarea>
+                <label for="text_message" class="input_label text-gradient">Descrizione</label>
+                <textarea class="form-control" id="text_message" rows="3" v-model="text_message" ref="message"
+                  @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter" for="text_message"></textarea>
                 <div class="error"></div>
               </div>
-              <input
-                type="hidden"
-                name="apartment_id"
-                for="apartment_id"
-                v-model="apartment_id"
-              />
+              <input type="hidden" name="apartment_id" for="apartment_id" v-model="apartment_id" />
             </form>
           </div>
           <div class="modal-footer justify-content-between">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Chiudi
             </button>
-            <button
-              v-if="!showSuccess"
-              type="submit"
-              class="styled-btn"
-              @click="sendMessage"
-            >
+            <button v-if="!showSuccess" type="submit" class="styled-btn" @click="sendMessage">
               Invia
             </button>
           </div>
@@ -356,49 +301,26 @@ h5 {
   }
 }
 
-.container-img > * {
-  width: calc((100% / 3) - 1rem);
-}
-
 .container-img {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-bottom: 1.3rem;
+  border-radius: 11px;
+  overflow: hidden;
+  margin-bottom: 1.3rem;
 
   img {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    object-position: center;
     transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 }
 
 .img-apartment {
-  overflow: hidden;
+  cursor: pointer;
 
   &:hover img {
     transform: scale(1.2);
-
-    cursor: grab;
   }
-}
-
-.img-apartment:nth-child(1) {
-  border-top-left-radius: 20px;
-}
-
-.img-apartment:nth-child(3) {
-  border-top-right-radius: 20px;
-}
-
-.img-apartment:nth-child(4) {
-  border-bottom-left-radius: 20px;
-}
-
-.img-apartment:nth-child(6) {
-  border-bottom-right-radius: 20px;
 }
 
 .content-left {
@@ -443,20 +365,10 @@ button {
   margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 767px) {
   .info-container {
     display: flex !important;
     flex-direction: column;
-  }
-
-  .img-apartment {
-    width: 250px;
-  }
-}
-
-@media screen and (max-width: 532px) {
-  .img-apartment {
-    width: 100%;
   }
 }
 </style>
