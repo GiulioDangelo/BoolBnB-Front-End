@@ -66,7 +66,7 @@ export default {
 
 <template>
   <div class="container">
-    <h1>In evidenza</h1>
+    <h1 class="text-gradient">In evidenza</h1>
 
 
     <div class="carousel-btn d-flex justify-content-end">
@@ -82,8 +82,8 @@ export default {
                 alt=""
                 class="caurosel-img"
               />
-              <h5>{{ apartment.title }}</h5>
-              <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }" class="btn btn-primary mt-auto my-2">View more</router-link>
+              <h4 class="p-2 text-gradient">{{ apartment.title }}</h4>
+              <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }" class="styled-btn mt-auto my-2" style="text-decoration: none; padding-inline: 2em;">View more</router-link>
         </div>
       </Slide>
     </Carousel>
@@ -91,12 +91,12 @@ export default {
 </div> 
 
   <div class="container">
-    <h2 class="mt-5 py-5">I nostri appartmenti</h2>
+    <h2 class="mt-5 py-5 text-gradient">I nostri appartmenti</h2>
     <apartmentList/>
   </div>
 
   <div class="container">
-    <h2 class="mt-5">Mete piu' richieste</h2>
+    <h2 class="mt-5 text-gradient">Mete piu' richieste</h2>
     <div class="row mb-5">
       <div class="col-6 city-container">
         <img
