@@ -57,7 +57,7 @@ export default {
 
 <template>
   <div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center align-items-center row-gap-4">
       <div
         class="col-lg-4 col-md-6 col-sm-12"
         v-for="apartment in arrApartments"
