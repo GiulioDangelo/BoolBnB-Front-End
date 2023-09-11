@@ -443,115 +443,132 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <form @submit.prevent="getFilteredApartments">
-            <div class="container d-flex flex-column gap-4">
-                <h1>Ricerca Avanzata</h1>
+    <div class="d-flex flex-column gap-5">
+        <div class="container">
+            <div class="card mt-0 box-shadow">
+                <div class="card-body d-flex flex-column gap-3 py-3">
 
-                <div class="row row-cols-1 row-cols-md-2">
-                    <!-- Country -->
-                    <div class="input_container">
-                        <select id="country" class="form-select" name="country" ref="country" v-model="country"
-                            @input="validate">
-                            <option value="">Seleziona Nazione</option>
-                        </select>
-                        <div class="error"></div>
-                    </div>
+                    <form @submit.prevent="getFilteredApartments">
+                        <div class="container d-flex flex-column gap-4">
+                            <h1 class="text-gradient">Ricerca Avanzata</h1>
 
-                    <!-- Address -->
-                    <div class="input_container">
-                        <input class="form-control" type="text" id="address"
-                            placeholder="Inserisci una città o un indirizzo" aria-label="address" name="q"
-                            autocomplete="off" ref="address" v-model.trim="address"
-                            @input="validate($event) + addressAutocomplete + saveCoordinate" :disabled="!country"
-                            @keydown.enter.prevent="preventFormSubmitOnEnter" />
-                        <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
-                            style="top: calc(100% - 15px); left: 12px">
-                        </ul>
-                        <div class="error"></div>
-                    </div>
-                </div>
+                            <div class="row row-cols-1 row-cols-md-2">
 
-                <!-- Distance -->
-                <div class="input_container_split">
-                    <input type="range" class="form-range" id="distance" ref="distance" v-model.number="distance">
-                    <input type="number" class="align-self-end" id="distance" min="1" max="100" ref="distance" step="1"
-                        v-model.number="distance" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
-                    <div class="error"></div>
-                </div>
+                                <!-- Country -->
+                                <div class="input_container">
+                                    <select id="country" class="form-select" name="country" ref="country" v-model="country"
+                                        @input="validate">
+                                        <option value="">Seleziona Nazione</option>
+                                    </select>
+                                    <div class="error"></div>
+                                </div>
 
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-md-4">
+                                <!-- Address -->
+                                <div class="input_container">
+                                    <input class="form-control" type="text" id="address"
+                                        placeholder="Inserisci una città o un indirizzo" aria-label="address" name="q"
+                                        autocomplete="off" ref="address" v-model.trim="address"
+                                        @input="validate($event) + addressAutocomplete + saveCoordinate"
+                                        :disabled="!country" @keydown.enter.prevent="preventFormSubmitOnEnter" />
+                                    <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
+                                        style="top: calc(100% - 15px); left: 12px">
+                                    </ul>
+                                    <div class="error"></div>
+                                </div>
 
-                        <!-- Size -->
-                        <div class="input_container_split">
-                            <label lass="form-label" for="size">Dimesioni</label>
-                            <input class="form-control" id="size" type="number" placeholder="Numero in metri quadrati"
-                                ref="size" v-model.number="size" @input="validate"
-                                @keydown.enter.prevent="preventFormSubmitOnEnter">
-                            <div class="error"></div>
+                            </div>
+
+                            <!-- Distance -->
+                            <div class="input_container_split">
+                                <input type="range" class="form-range" id="distance" ref="distance"
+                                    v-model.number="distance">
+                                <input type="number" class="form-control align-self-end" id="distance" min="1" max="100"
+                                    ref="distance" step="1" v-model.number="distance" @input="validate"
+                                    @keydown.enter.prevent="preventFormSubmitOnEnter">
+                                <div class="error"></div>
+                            </div>
+
+                            <div class="row row-cols-1 row-cols-md-4">
+
+                                <!-- Size -->
+                                <div class="input_container_split">
+                                    <label lass="form-label" for="size">Dimesioni</label>
+                                    <input class="form-control" id="size" type="number"
+                                        placeholder="Numero in metri quadrati" ref="size" v-model.number="size"
+                                        @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
+                                    <div class="error"></div>
+                                </div>
+
+                                <!-- Rooms -->
+                                <div class="input_container_split">
+                                    <label lass="form-label" for="rooms">Camere</label>
+                                    <input class="form-control" id="rooms" type="number" placeholder="Numero Camere"
+                                        ref="rooms" v-model.number="rooms" @input="validate"
+                                        @keydown.enter.prevent="preventFormSubmitOnEnter">
+                                    <div class="error"></div>
+                                </div>
+
+                                <!-- Beds -->
+                                <div class="input_container_split">
+                                    <label lass="form-label" for="beds">Letti</label>
+                                    <input class="form-control" id="beds" type="number" placeholder="Numero Letti"
+                                        ref="beds" v-model.number="beds" @input="validate"
+                                        @keydown.enter.prevent="preventFormSubmitOnEnter">
+                                    <div class="error"></div>
+                                </div>
+
+                                <!-- Bathrooms -->
+                                <div class="input_container_split">
+                                    <label lass="form-label" for="bathrooms">Bagni</label>
+                                    <input class="form-control" id="bathrooms" type="number" placeholder="Numero Bagni"
+                                        ref="bathrooms" v-model.number="bathrooms" @input="validate"
+                                        @keydown.enter.prevent="preventFormSubmitOnEnter">
+                                    <div class="error"></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Services -->
+                            <div class="container">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                                    <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
+                                        <input type="checkbox" class="form-check-input" :id="service.id" :value="service.id"
+                                            v-model="selectedServices" :disabled="requiredServices.includes(service.id)">
+                                        <label :for="service.id" class="form-check-label">{{ service.name }}</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="styled-btn">Cerca Appartamenti</button>
+                                </div>
+                            </div>
                         </div>
+                    </form>
 
-                        <!-- Rooms -->
-                        <div class="input_container_split">
-                            <label lass="form-label" for="rooms">Camere</label>
-                            <input class="form-control" id="rooms" type="number" placeholder="Numero Camere" ref="rooms"
-                                v-model.number="rooms" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
-                            <div class="error"></div>
-                        </div>
-
-                        <!-- Beds -->
-                        <div class="input_container_split">
-                            <label lass="form-label" for="beds">Letti</label>
-                            <input class="form-control" id="beds" type="number" placeholder="Numero Letti" ref="beds"
-                                v-model.number="beds" @input="validate" @keydown.enter.prevent="preventFormSubmitOnEnter">
-                            <div class="error"></div>
-                        </div>
-
-                        <!-- Bathrooms -->
-                        <div class="input_container_split">
-                            <label lass="form-label" for="bathrooms">Bagni</label>
-                            <input class="form-control" id="bathrooms" type="number" placeholder="Numero Bagni"
-                                ref="bathrooms" v-model.number="bathrooms" @input="validate"
-                                @keydown.enter.prevent="preventFormSubmitOnEnter">
-                            <div class="error"></div>
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Services -->
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                        <div v-for=" service  in    arrServices" :key="service.id" class="form-check mb-2">
-                            <input type="checkbox" class="form-check-input" :id="service.id" :value="service.id"
-                                v-model="selectedServices" :disabled="requiredServices.includes(service.id)">
-                            <label :for="service.id" class="form-check-label">{{ service.name }}</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="styled-btn">Cerca Appartamenti</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="container">
-        <div class="row d-flex justify-content-center align-items-center card-container">
-            <div v-if="arrApartments === undefined" class="col-12 text-center">
-                <h2 class="text-gradient m-0">Nessuno risultato trovato</h2>
-            </div>
-            <div v-else class="col-4" v-for="apartment in arrApartments" :key="apartment.id">
-                <ApartmentCard :apartment="apartment" />
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div id="map" class="map mt-4 mb-1"></div>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center align-items-center g-4">
+                <div v-if="arrApartments === undefined" class="col-12 text-center">
+                    <div class="card box-shadow">
+                        <h2 class="text-gradient m-0">Nessuno risultato trovato</h2>
+                    </div>
+                </div>
+                <div v-else v-for="apartment in arrApartments" :key="apartment.id">
+                    <ApartmentCard :apartment="apartment" />
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card box-shadow overflow-hidden">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -571,6 +588,4 @@ export default {
     text-decoration: underline;
     background-color: #f8f9fa !important;
 }
-
-@media screen and (max-width: 767px) {}
 </style>
