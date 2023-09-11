@@ -56,14 +56,14 @@ export default {
 .map {
   height: 100%;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 11px;
 }
 
 .tomtom {
   height: 400px;
 }
 
-@media screen and (max-width:766px) {
+@media screen and (max-width:767px) {
   .map {
     height: 400px;
     width: 100%;

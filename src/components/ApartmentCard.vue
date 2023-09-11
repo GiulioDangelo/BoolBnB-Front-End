@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-  <div class="card d-flex align-items-center justify-content-center mt-5">
+  <div class="card d-flex align-items-center justify-content-center box-shadow">
     <div class="img-container">
       <img :src="getImageUrl(apartment.cover)" alt="" />
     </div>
