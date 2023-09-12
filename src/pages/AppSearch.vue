@@ -4,10 +4,12 @@ import { store } from "../store";
 import ApartmentCard from "../components/ApartmentCard.vue";
 import tt from "@tomtom-international/web-sdk-maps";
 import "@tomtom-international/web-sdk-maps";
+import Loader from "./Loader.vue";
 
 export default {
     components: {
         ApartmentCard,
+        Loader,
     },
     data() {
         return {
@@ -30,24 +32,29 @@ export default {
             arrCountries: [],
             country: "",
             key: "bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R",
+            loading: false,
         }
     },
     methods: {
         getAllApartments() {
+            this.loading = true,
             axios.get(this.store.backendURL + "api/apartments").then(response => {
                 this.arrApartments = response.data.results;
             }).catch(error => {
                 console.error('Request failed:', error);
-            });;
+            }).finally(() => this.loading = false)
+            ;;
         },
         getAllServices() {
+            this.loading = true,
             axios.get(this.store.backendURL + "api/services").then(response => {
                 this.arrServices = response.data.results;
             }).catch(error => {
                 console.error('Request failed:', error);
-            });;
+            }).finally(() => this.loading = false);;
         },
         getCountries() {
+            this.loading = true,
             axios.get(this.urlAllCountries)
                 .then(response => {
                     const country = document.getElementById("country");
@@ -83,7 +90,7 @@ export default {
                     });
                 }).catch(error => {
                     console.error('Request failed:', error);
-                });
+                }).finally(() => this.loading = false);
         },
         clearSuggestions(list) {
             while (list.firstChild) {
@@ -92,6 +99,7 @@ export default {
             this.arrSuggestions = [];
         },
         getFilteredApartments(event) {
+            this.loading = true;
             if (!this.validateForm()) {
                 event.preventDefault();
             } else {
@@ -110,8 +118,46 @@ export default {
                     this.arrApartments = response.data.results;
                 }).catch(error => {
                     console.error('Request failed:', error);
-                });;
+                }).finally(() => this.loading = false);;
             }
+        },
+        fetchData(){
+          this.map = null;
+        this.loading = true;
+        axios
+            .get(this.store.backendURL + "api/apartments/")
+            .then(response => {
+                // this.apartment = response.data.results;
+                this.arrApartments = response.data.results;
+
+                if (this.arrApartments && this.arrApartments.length > 0) {
+                    this.map = tt.map({
+                        key: "bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R",
+                        container: "map",
+                        center: [12.5113300, 41.535158],
+                        zoom: 3,
+                    });
+
+                    this.arrApartments.forEach((apartment) => {
+                        if (apartment.latitude && apartment.longitude) {
+                            this.map.on("load", () => {
+                                let latitude = parseFloat(apartment.latitude);
+                                let longitude = parseFloat(apartment.longitude);
+                                let center = [latitude, longitude];
+                                let marker = new tt.Marker()
+                                    .setLngLat(center)
+                                    .addTo(this.map);
+                            });
+                        }
+                    });
+                } else {
+                    console.error(
+                        "I dati dell'appartamento non contengono latitudine e/o longitudine valide."
+                    );
+                }
+            })
+            .catch(error => console.error(error))
+            .finally(() => this.loading = false);  
         },
         validateForm() {
             let isValid = true;
@@ -316,42 +362,9 @@ export default {
             }
         },
     },
+
     mounted() {
-        this.map = null;
-
-        axios
-            .get(this.store.backendURL + "api/apartments/")
-            .then(response => {
-                // this.apartment = response.data.results;
-                this.arrApartments = response.data.results;
-
-                if (this.arrApartments && this.arrApartments.length > 0) {
-                    this.map = tt.map({
-                        key: "bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R",
-                        container: "map",
-                        center: [12.5113300, 41.535158],
-                        zoom: 3,
-                    });
-
-                    this.arrApartments.forEach((apartment) => {
-                        if (apartment.latitude && apartment.longitude) {
-                            this.map.on("load", () => {
-                                let latitude = parseFloat(apartment.latitude);
-                                let longitude = parseFloat(apartment.longitude);
-                                let center = [latitude, longitude];
-                                let marker = new tt.Marker()
-                                    .setLngLat(center)
-                                    .addTo(this.map);
-                            });
-                        }
-                    });
-                } else {
-                    console.error(
-                        "I dati dell'appartamento non contengono latitudine e/o longitudine valide."
-                    );
-                }
-            })
-            .catch(error => console.error(error));
+        this.fetchData();
     },
     computed: {
         addressAutocomplete() {
@@ -362,6 +375,7 @@ export default {
                 delete axios.defaults.headers.common['X-Requested-With'];
 
                 if (this.address && this.country) {
+                    this.loading = true,
                     axios.get("https://api.tomtom.com/search/2/search/" + this.address + '.json', {
                         params: {
                             typeahead: true,
@@ -398,12 +412,13 @@ export default {
                         });
                     }).catch(error => {
                         console.error('Request failed:', error);
-                    });
+                    }).finally(() => this.loading = false);
                 }
             });
         },
         saveCoordinate() {
             if (this.address.length > 1) {
+                this.loading = true,
                 axios
                     .get("https://api.tomtom.com/search/2/structuredGeocode.json", {
                         params: {
@@ -430,7 +445,8 @@ export default {
                         // this.longitude = response.data.results[0].position.lon;
 
                         // console.log(this.latitude, this.longitude)
-                    }).catch(error => console.error('Request failed:', error));
+                    }).catch(error => console.error('Request failed:', error))
+                    .finally(() => this.loading = false);
             }
         },
     },
@@ -443,6 +459,7 @@ export default {
 </script>
 
 <template>
+    <Loader v-if="loading" />
     <div class="d-flex flex-column gap-5">
         <div class="container">
             <div class="card mt-0 box-shadow">
