@@ -57,17 +57,19 @@ export default {
 
 <template>
   <div class="container">
-    <div class="row d-flex justify-content-center align-items-center row-gap-4">
-      <div
-        class="col-lg-4 col-md-6 col-sm-12"
-        v-for="apartment in arrApartments"
-        :key="apartment.id"
-      >
-        <ApartmentCard :apartment="apartment" />
-      </div>
-    </div>
+    <div class="d-flex flex-column gap-5">
 
-    <div id="map" class="map mt-4 mb-1"></div>
+      <div class="row d-flex justify-content-center align-items-center row-gap-4">
+        <div class="col-lg-4 col-md-6 col-sm-12" v-for="apartment in arrApartments" :key="apartment.id">
+          <ApartmentCard :apartment="apartment" />
+        </div>
+      </div>
+
+      <div class="card box-shadow overflow-hidden">
+        <div id="map" class="map"></div>
+      </div>
+
+    </div>
   </div>
 </template>
 

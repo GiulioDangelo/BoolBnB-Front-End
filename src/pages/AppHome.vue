@@ -23,132 +23,114 @@ export default {
       loading: false,
     };
   },
-  
+
 
   methods: {
     fetchData() {
       this.loading = true;
-    
-    axios
-      .get(this.store.backendURL + "api/apartments/")
-      .then((response) => {
-        this.arrApartments = response.data.results;
-        this.sponsoredApartments = this.arrApartments.filter(apartment => apartment.active_sponsors.length !== 0);
-      })
-      .catch((error) => console.error(error))
-      .finally(() => {
-        this.loading = false;
-      })
+
+      axios
+        .get(this.store.backendURL + "api/apartments/")
+        .then((response) => {
+          this.arrApartments = response.data.results;
+          this.sponsoredApartments = this.arrApartments.filter(apartment => apartment.active_sponsors.length !== 0);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => {
+          this.loading = false;
+        })
     },
   },
 
-  mounted(){
+  mounted() {
     this.fetchData();
   },
 
   setup() {
-        const myCarousel = ref(null);
+    const myCarousel = ref(null);
 
-        return {
-            myCarousel,
-            breakpoints: {
-              100: {
-              itemsToShow: 1,
-            },
-            500: {
-              itemsToShow: 2,
-            },
-            768: {
-              itemsToShow: 2.5,
-            },
-            1400: {
-              itemsToShow: 3,
-            },
-          },
-        }
-    },
+    return {
+      myCarousel,
+      breakpoints: {
+        100: {
+          itemsToShow: 1,
+        },
+        500: {
+          itemsToShow: 2,
+        },
+        768: {
+          itemsToShow: 2.5,
+        },
+        1400: {
+          itemsToShow: 3,
+        },
+      },
+    }
+  },
 };
 </script>
 
 <template>
   <div>
-<Loader v-if="loading" />
-<router-view>
-  <div class="container">
-    <h1 class="text-gradient">In evidenza</h1>
+    <Loader v-if="loading" />
+    <router-view>
+      <div class="container">
+        <h1 class="text-gradient">In evidenza</h1>
 
-
-    <div class="carousel-btn d-flex justify-content-end">
-      <a @click=myCarousel.prev class="prev mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-left']" /></a>
-      <a @click=myCarousel.next class="next mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-right']" /></a>
-    </div>
-
-    <Carousel :wrap-around="true" :autoplay=3000  ref="myCarousel"  :breakpoints="breakpoints" :pauseAutoplayOnHover="true">
-      <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
-        <div class="caurosel-items">
-          <img
-                :src="this.store.backendURL + 'storage/' + apartment.cover"
-                alt=""
-                class="caurosel-img"
-              />
-              <h4 class="p-2 text-gradient">{{ apartment.title }}</h4>
-              <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }" class="styled-btn mt-auto my-2" style="text-decoration: none; padding-inline: 2em;">View more</router-link>
+        <div class="carousel-btn d-flex justify-content-end">
+          <a @click=myCarousel.prev class="prev mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-left']" /></a>
+          <a @click=myCarousel.next class="next mx-2 fs-3"><font-awesome-icon :icon="['fas', 'arrow-right']" /></a>
         </div>
-      </Slide>
-    </Carousel>
 
-</div> 
+        <Carousel :wrap-around="true" :autoplay=3000 ref="myCarousel" :breakpoints="breakpoints"
+          :pauseAutoplayOnHover="true">
+          <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
+            <div class="caurosel-items">
+              <img :src="this.store.backendURL + 'storage/' + apartment.cover" alt="" class="caurosel-img" />
+              <h4 class="p-2 text-gradient">{{ apartment.title }}</h4>
+              <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
+                class="styled-btn mt-auto my-2" style="text-decoration: none; padding-inline: 2em;">Guarda</router-link>
+            </div>
+          </Slide>
+        </Carousel>
 
-  <div class="container">
-    <h2 class="mt-5 py-5 text-gradient">I nostri appartmenti</h2>
-    <ApartmentList/>
+      </div>
+
+      <div class="container">
+        <h2 class="mt-5 py-5 text-gradient">I nostri appartmenti</h2>
+        <ApartmentList />
+      </div>
+
+      <div class="container">
+        <h2 class="mt-5 text-gradient">Mete più richieste</h2>
+        <div class="row mb-5">
+          <div class="col-6 city-container">
+            <img
+              src="https://cf.bstatic.com/xdata/images/city/600x600/613105.jpg?k=1e85cf4dec7b0d5a6327be91c38cf9c1711f9da1a31c4cba736f9cb751443ff1&o="
+              alt="" class="roma" />
+          </div>
+          <div class="col-6 city-container">
+            <img src="https://hips.hearstapps.com/hmg-prod/images/napoli-1653914862.png" alt="" class="napoli" />
+          </div>
+          <div class="col-4 city-container">
+            <img src="https://img.gruppomol.it/articoli/image/milano/1200x801_milano-mercato.jpg" alt="" class="milano" />
+          </div>
+          <div class="col-4 city-container">
+            <img
+              src="https://hips.hearstapps.com/hmg-prod/images/florence-royalty-free-image-1674549002.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"
+              alt="" />
+          </div>
+          <div class="col-4 city-container">
+            <img src="https://www.berlino.com/wp-content/uploads/sites/13/berlino-panorama.jpg" alt="" class="berlino" />
+          </div>
+        </div>
+      </div>
+    </router-view>
   </div>
-
-  <div class="container">
-    <h2 class="mt-5 text-gradient">Mete piu' richieste</h2>
-    <div class="row mb-5">
-      <div class="col-6 city-container">
-        <img
-          src="https://cf.bstatic.com/xdata/images/city/600x600/613105.jpg?k=1e85cf4dec7b0d5a6327be91c38cf9c1711f9da1a31c4cba736f9cb751443ff1&o="
-          alt=""
-          class="roma"
-        />
-      </div>
-      <div class="col-6 city-container">
-        <img
-          src="https://hips.hearstapps.com/hmg-prod/images/napoli-1653914862.png"
-          alt=""
-          class="napoli"
-        />
-      </div>
-      <div class="col-4 city-container">
-        <img
-          src="https://img.gruppomol.it/articoli/image/milano/1200x801_milano-mercato.jpg"
-          alt=""
-          class="milano"
-        />
-      </div>
-      <div class="col-4 city-container">
-        <img
-          src="https://hips.hearstapps.com/hmg-prod/images/florence-royalty-free-image-1674549002.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"
-          alt=""
-        />
-      </div>
-      <div class="col-4 city-container">
-        <img
-          src="https://www.berlino.com/wp-content/uploads/sites/13/berlino-panorama.jpg"
-          alt=""
-          class="berlino"
-        />
-      </div>
-    </div>
-  </div>
-</router-view>
-</div>
 </template>
 
 <style lang="scss" scoped>
-.caurosel-items{
+.caurosel-items {
   display: flex;
   flex-direction: column;
   align-items: center;
