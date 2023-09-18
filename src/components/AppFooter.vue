@@ -12,30 +12,30 @@ export default {
 
 <template>
   <footer>
-    <p class="m-0 d-flex justify-content-center align-items-center gap-1 py-3">
+    <p class="socials m-0 d-flex justify-content-center align-items-center gap-2 py-3">
       <!-- Facebook -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #3b5998;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'facebook']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #3b5998;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'facebook']" /></a>
 
       <!-- Twitter -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #55acee;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'twitter']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #55acee;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'twitter']" /></a>
 
       <!-- Google -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #dd4b39;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'google']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #dd4b39;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'google']" /></a>
 
       <!-- Instagram -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #ac2bac;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'instagram']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #ac2bac;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'instagram']" /></a>
 
       <!-- Linkedin -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #0082ca;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'linkedin']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #0082ca;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'linkedin']" /></a>
 
       <!-- Github -->
-      <a class="btn text-white rounded-circle m-1" style="background-color: #333333;" href="#"
-        role="button"><font-awesome-icon :icon="['fab', 'github']" /></a>
+      <a class="text-white rounded-circle" style="background-color: #333333;" href="#" role="button"><font-awesome-icon
+          :icon="['fab', 'github']" /></a>
     </p>
 
     <div class="container">
@@ -70,6 +70,22 @@ export default {
 footer {
   background-color: #fdfdfd;
   box-shadow: 0px -2px 10px -2px rgba(0, 0, 0, 0.3);
+}
+
+.socials {
+  a {
+    width: 32px;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    * {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 
 .full-logo,
