@@ -29,13 +29,13 @@ export default {
               </li>
             </ul>
           </div>
-        
 
-            <a class="link-unstyled d-flex align-center" :href="store.frontendURL + 'search'">
-              <button class="button text-gradient">
-                <span><font-awesome-icon :icon="['fas', 'magnifying-glass']" /> <span class="disapear">Cerca</span></span>
-              </button>
-            </a>
+
+          <a class="link-unstyled d-flex align-center" :href="store.frontendURL + 'search'">
+            <button class="button text-gradient">
+              <span><font-awesome-icon :icon="['fas', 'magnifying-glass']" /> <span class="disapear">Cerca</span></span>
+            </button>
+          </a>
 
           <div class="d-none d-lg-block">
             <div class="d-flex gap-2" style="height: 100%;">
@@ -53,22 +53,36 @@ export default {
               </a>
             </div>
           </div>
-          
-          <button class="styled-btn d-md-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><font-awesome-icon :icon="['fas', 'bars']" /></button>
 
-          <div class="offcanvas offcanvas-end d-md-block d-lg-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <button class="styled-btn d-md-block d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><font-awesome-icon
+              :icon="['fas', 'bars']" /></button>
+
+          <div class="offcanvas offcanvas-end d-md-block d-lg-none" tabindex="-1" id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header d-flex justify-content-end" style="margin-bottom: -2em;">
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
               <ul class="list-nav-phone">
-                <li class="link-unstyled"><a class="text-gradient" href="/"><span><font-awesome-icon :icon="['fas', 'house']" /></span> <span class="disapear" style="padding-left: 1em;">Home</span></a></li>
-                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;"></li>
-                <li class="link-unstyled"><a class="text-gradient" :href="store.backendURL + 'login'"><span><font-awesome-icon :icon="['fas', 'user-lock']" /></span> <span class="disapear" style="padding-left: 1em;">Accedi</span></a></li>
-                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;"></li>
-                <li class="link-unstyled"><a class="text-gradient" :href="store.backendURL + 'register'"><span><font-awesome-icon :icon="['fas', 'user-plus']" /></span> <span class="disapear" style="padding-left: 1em;">Registrati</span></a></li>
-                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;"></li>
-                <li class="link-unstyled"><a class="text-gradient" href="/aboutus"><span><font-awesome-icon :icon="['fas', 'bolt']" /></span> <span class="disapear" style="padding-left: 1em;">About Us</span></a></li>
+                <li class="link-unstyled"><a class="text-gradient" href="/"><span><font-awesome-icon
+                        :icon="['fas', 'house']" /></span> <span class="disapear"
+                      style="padding-left: 1em;">Home</span></a></li>
+                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;">
+                </li>
+                <li class="link-unstyled"><a class="text-gradient"
+                    :href="store.backendURL + 'login'"><span><font-awesome-icon :icon="['fas', 'user-lock']" /></span>
+                    <span class="disapear" style="padding-left: 1em;">Accedi</span></a></li>
+                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;">
+                </li>
+                <li class="link-unstyled"><a class="text-gradient"
+                    :href="store.backendURL + 'register'"><span><font-awesome-icon :icon="['fas', 'user-plus']" /></span>
+                    <span class="disapear" style="padding-left: 1em;">Registrati</span></a></li>
+                <li style="height: 1px; width: 90%; background-color: #424172; margin-top: .5em; margin-bottom: .5em;">
+                </li>
+                <li class="link-unstyled"><a class="text-gradient" href="/aboutus"><span><font-awesome-icon
+                        :icon="['fas', 'bolt']" /></span> <span class="disapear" style="padding-left: 1em;">About
+                      Us</span></a></li>
 
               </ul>
             </div>
@@ -88,7 +102,7 @@ export default {
 <style lang="scss">
 .navbar {
   height: 70px;
-  position: fixed;
+  position: fixed !important;
   left: 0;
   top: 0;
   z-index: 99;
@@ -110,7 +124,7 @@ export default {
   text-decoration: underline;
 }
 
-.icon-logo{
+.icon-logo {
   display: none;
 }
 
@@ -214,38 +228,39 @@ a img {
   width: 100%;
 }
 
-.list-nav-phone{
+.list-nav-phone {
   list-style-type: none;
-  a{
+
+  a {
     color: #424172;
   }
 }
-.offcanvas{
-  margin-bottom: 28em !important; 
-  border-radius: .5em; 
-  margin-top: .5em; 
-  margin-right: .5em; 
+
+.offcanvas {
+  margin-bottom: 28em !important;
+  border-radius: .5em;
+  margin-top: .5em;
+  margin-right: .5em;
 }
 
 @media screen and (max-width: 504px) {
-  .icon-logo{
+  .icon-logo {
     display: block;
     object-fit: contain;
   }
 
-  .full-logo{
+  .full-logo {
     display: none;
   }
 
-  .container{
+  .container {
     height: 100%;
   }
 
 }
 
 @media screen and (max-width: 415px) {
-  .offcanvas{
+  .offcanvas {
     margin-right: 0;
   }
-}
-</style>
+}</style>
