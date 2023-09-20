@@ -11,7 +11,7 @@ export default {
 
 <template>
   <AppNav />
-  <main style="margin-top: 100px; margin-bottom: 50px; min-height: 63vh;">
+  <main style="margin-top: 100px; min-height: 63vh">
     <router-view></router-view>
   </main>
   <AppFooter />
