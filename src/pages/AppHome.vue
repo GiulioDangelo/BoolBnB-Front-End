@@ -105,23 +105,19 @@ export default {
         <h2 class="mt-5 text-gradient">Mete più richieste</h2>
         <div class="row mb-5">
           <div class="col-6 city-container">
-            <img
-              src="https://cf.bstatic.com/xdata/images/city/600x600/613105.jpg?k=1e85cf4dec7b0d5a6327be91c38cf9c1711f9da1a31c4cba736f9cb751443ff1&o="
-              alt="" class="roma" />
+            <img src="../assets/img/cities/roma.jpg" alt="roma" class="roma" />
           </div>
           <div class="col-6 city-container">
-            <img src="https://hips.hearstapps.com/hmg-prod/images/napoli-1653914862.png" alt="" class="napoli" />
+            <img src="../assets/img/cities/napoli.png" alt="napoli" class="napoli" />
           </div>
           <div class="col-4 city-container">
-            <img src="https://img.gruppomol.it/articoli/image/milano/1200x801_milano-mercato.jpg" alt="" class="milano" />
+            <img src="../assets/img/cities/milano.jpg" alt="milano" class="milano" />
           </div>
           <div class="col-4 city-container">
-            <img
-              src="https://hips.hearstapps.com/hmg-prod/images/florence-royalty-free-image-1674549002.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"
-              alt="" />
+            <img src="../assets/img/cities/firenze.jpg" alt="firenze" class="firenze" />
           </div>
           <div class="col-4 city-container">
-            <img src="https://www.berlino.com/wp-content/uploads/sites/13/berlino-panorama.jpg" alt="" class="berlino" />
+            <img src="../assets/img/cities/berlino.jpg" alt="berlino" class="berlino" />
           </div>
         </div>
       </div>
