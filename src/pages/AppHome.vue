@@ -108,7 +108,7 @@ export default {
             <img src="../assets/img/cities/roma.jpg" alt="roma" class="roma" />
           </div>
           <div class="col-6 city-container">
-            <img src="../assets/img/cities/napoli.png" alt="napoli" class="napoli" />
+            <img src="../assets/img/cities/napoli.jpg" alt="napoli" class="napoli" />
           </div>
           <div class="col-4 city-container">
             <img src="../assets/img/cities/milano.jpg" alt="milano" class="milano" />
