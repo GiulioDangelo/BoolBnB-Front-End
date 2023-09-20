@@ -243,6 +243,10 @@ a img {
   margin-right: .5em;
 }
 
+.offcanvas-header {
+  z-index: 1046;
+}
+
 @media screen and (max-width: 504px) {
   .icon-logo {
     display: block;
@@ -263,4 +267,5 @@ a img {
   .offcanvas {
     margin-right: 0;
   }
-}</style>
+}
+</style>
