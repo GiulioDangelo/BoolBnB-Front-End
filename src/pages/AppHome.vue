@@ -86,7 +86,8 @@ export default {
           :pauseAutoplayOnHover="true">
           <Slide v-for="apartment in sponsoredApartments" :key="apartment.id">
             <div class="caurosel-items">
-              <img :src="this.store.backendURL + 'storage/' + apartment.cover" alt="" class="caurosel-img" />
+              <img :src="this.store.backendURL + 'storage/' + apartment.cover" alt="" class="caurosel-img"
+                loading="lazy" />
               <h4 class="p-2 text-gradient">{{ apartment.title }}</h4>
               <router-link :to="{ name: 'apartments.show', params: { slug: apartment.slug } }"
                 class="styled-btn mt-auto my-2" style="text-decoration: none; padding-inline: 2em;">Guarda</router-link>
@@ -105,19 +106,19 @@ export default {
         <h2 class="mt-5 text-gradient">Mete più richieste</h2>
         <div class="row mb-5">
           <div class="col-6 city-container">
-            <img src="../assets/img/cities/roma.jpg" alt="roma" class="roma" />
+            <img src="../assets/img/cities/roma.jpg" alt="roma" class="roma" loading="lazy" />
           </div>
           <div class="col-6 city-container">
-            <img src="../assets/img/cities/napoli.jpg" alt="napoli" class="napoli" />
+            <img src="../assets/img/cities/napoli.jpg" alt="napoli" class="napoli" loading="lazy" />
           </div>
           <div class="col-4 city-container">
-            <img src="../assets/img/cities/milano.jpg" alt="milano" class="milano" />
+            <img src="../assets/img/cities/milano.jpg" alt="milano" class="milano" loading="lazy" />
           </div>
           <div class="col-4 city-container">
-            <img src="../assets/img/cities/firenze.jpg" alt="firenze" class="firenze" />
+            <img src="../assets/img/cities/firenze.jpg" alt="firenze" class="firenze" loading="lazy" />
           </div>
           <div class="col-4 city-container">
-            <img src="../assets/img/cities/berlino.jpg" alt="berlino" class="berlino" />
+            <img src="../assets/img/cities/berlino.jpg" alt="berlino" class="berlino" loading="lazy" />
           </div>
         </div>
       </div>
